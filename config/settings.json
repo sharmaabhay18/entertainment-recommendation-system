@@ -1,0 +1,6 @@
+{
+  "mongoConfig": {
+    "serverUrl": "mongodb+srv://group25:Group@25@cluster0.l0vs5.mongodb.net/test",
+    "database": "entertainment_recommendation"
+  }
+}
