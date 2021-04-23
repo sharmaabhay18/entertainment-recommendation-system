@@ -42,7 +42,8 @@ node_modules/
 jspm_packages/
 
 # mongo credentails
-config/settings.json
+config/mongoSettings.json
+config/appSettings.json
 
 # TypeScript v1 declaration files
 typings/

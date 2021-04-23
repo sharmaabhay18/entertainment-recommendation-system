@@ -3,7 +3,7 @@
     "browser": true
   },
   "parserOptions": {
-    "ecmaVersion": 2017
+    "ecmaVersion": 2020
   },
   "extends": ["airbnb-base", "plugin:prettier/recommended"],
   "plugins": ["prettier"],
