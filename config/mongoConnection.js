@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-const settings = require('./settings');
+const settings = require('./mongoSettings.json');
 
 const mongoConfig = settings.mongoConfig;
 
