@@ -6,7 +6,9 @@ const routeConstructor = (app) => {
     if(req.session.user) {
       res.status(200).send(req.session.user)
     } else {
-      res.render('pages/default')
+      res.render('ERS/landing', {
+        title: 'Nav',
+      });
     }
   });
   app.use('*', (_, res) => res.status(404).json('Page not found!'));

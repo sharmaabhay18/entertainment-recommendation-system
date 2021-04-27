@@ -15,14 +15,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.engine(
-  'handlebars',
+  '.hbs',
   exphbs({
     defaultLayout: 'main', 
     helpers: helper,
   })
 );
 
-app.set('view engine', 'handlebars');
+app.set('view engine', 'hbs');
 app.set('views', viewsPath);
 hbs.registerPartials(partialsPath);
 
