@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.engine(
-  'handlebars',
+  '.hbs',
   exphbs({
     defaultLayout: 'main',
     helpers: helper,
