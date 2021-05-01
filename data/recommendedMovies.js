@@ -1,8 +1,40 @@
+const { ObjectId } = require('mongodb');
+
 const mongoCollections = require('../config/mongoCollections');
+const errorValidator = require('../utils/errorValidation');
 
 const recommendedMovies = mongoCollections.recommended_movies;
 
+const allMovies = async () => {
+  try {
+    const movieCollection = await recommendedMovies();
+    const movieList = await movieCollection.find({}).toArray();
+
+    const moviePayload = movieList.map((movie) => {
+      return { _id: movie?._id?.toString(), ...movie };
+    });
+    return moviePayload;
+  } catch (error) {
+    throw `Error while fetching data from db ${error}`;
+  }
+};
+
 const get = async (id) => {
+  if (id === undefined) throw 'Id args is required';
+  errorValidator.validateObjectId(id, 'Movie id');
+
+  const movieCollection = await recommendedMovies();
+
+  const movieById = await movieCollection.findOne({
+    _id: ObjectId(id),
+  });
+
+  if (movieById === null) return [];
+
+  return movieById;
+};
+
+const getByExternalId = async (id) => {
   if (id === undefined) throw 'Id args is required';
   if (typeof id !== 'number') throw 'Please enter a valid id';
 
@@ -86,5 +118,7 @@ const create = async ({
 
 module.exports = {
   get,
+  getByExternalId,
   create,
+  allMovies,
 };
