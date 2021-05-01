@@ -1,7 +1,9 @@
 const express = require('express');
 const axios = require('axios');
 
+const errorValidator = require('../utils/errorValidation');
 const movies = require('../data/recommendedMovies');
+const comments = require('../data/comments');
 
 const router = express.Router();
 const { searchApi, imageApi, getMovie } = require('../api/api');
@@ -13,6 +15,53 @@ const appendPathToPoster = (movies) => {
   });
 };
 
+//get all movies
+router.get('/', async (_, res) => {
+  try {
+    const movieList = await movies.allMovies();
+    res.status(200).json({
+      status: true,
+      movies: movieList,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: false,
+      message: 'Something went wrong',
+    });
+  }
+});
+
+//get movies by id with comments
+router.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) throw 'Movie id args is required';
+    try {
+      errorValidator.validateObjectId(id, 'Movie id');
+    } catch (error) {
+      return res.status(400).json({ message: error });
+    }
+
+    const movie = await movies.get(id);
+    let finalPayload = movie;
+    if (movie) {
+      const allComments = await comments.getCommentsByMovie(id);
+      finalPayload = { ...movie, comments: allComments };
+    }
+
+    res.status(200).json({
+      status: true,
+      movies: finalPayload,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: false,
+      message: 'Something went wrong',
+    });
+  }
+});
+
+//search movie based on value
 router.get('/search', async (req, res) => {
   try {
     const { searchTerm } = req.query;
@@ -33,6 +82,8 @@ router.get('/search', async (req, res) => {
   }
 });
 
+//add movie implictly if not present to our
+//db when user is adding movie to their list
 router.post('/add-movie', async (req, res) => {
   try {
     const { status, externalId, userId } = req.body;
@@ -44,7 +95,7 @@ router.post('/add-movie', async (req, res) => {
       throw 'Please make sure status is of string type and is non empty';
 
     const parseExtId = parseInt(externalId);
-    const isMoviePresent = await movies.get(parseExtId);
+    const isMoviePresent = await movies.getByExternalId(parseExtId);
 
     if (isMoviePresent.length === 0) {
       //Add movie implicitly to our db from calling external api

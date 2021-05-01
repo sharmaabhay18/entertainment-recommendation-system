@@ -17,4 +17,5 @@ let getCollectionFn = (collection) => {
 module.exports = {
   recommended_movies: getCollectionFn('entertainment_recommendation'),
   users: getCollectionFn('users'),
+  comments: getCollectionFn('comments'),
 };
