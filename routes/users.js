@@ -70,7 +70,7 @@ router.post('/create', async (req, res) => {
       res.status(400).json({ error: 'Invalid email format' });
       return;
     }
-    if (userNames.indexOf(userNames)) {
+    if (!userNames.indexOf(username)) {
       res.status(400).json({ error: 'Username already exists' });
       return;
     }
@@ -90,6 +90,14 @@ router.get('/username', async (req, res) => {
   } catch (e) {
     res.status(404).json({ error: 'Post not found' });
   }
+});
+
+router.get('/logout', async (req, res) => {
+  req.session.destroy();
+  res.render('ERS/landing', {
+    title: 'Nav',
+    loggIn: true,
+  });
 });
 
 function validateEmail(email) {

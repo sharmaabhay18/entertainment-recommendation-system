@@ -132,11 +132,11 @@ document.forms['registerForm'].addEventListener('submit', (event) => {
     console.log(resp); // or resp.text() or whatever the server sends
     if (resp.status === 400) {
       $('#signup-submit').removeAttr('disabled');
-      alert('Wrong password');
+      alert('Something went wrong');
     }
     if (resp.status === 404) {
       $('#signup-submit').removeAttr('disabled');
-      alert('User not found');
+      alert('Something went wrong');
     }
   });
 });
