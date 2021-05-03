@@ -42,7 +42,7 @@ router.post('/add', async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       status: false,
-      message: 'Something went wrong',
+      message: error,
     });
   }
 });
@@ -71,7 +71,7 @@ router.post('/update', async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       status: false,
-      message: 'Something went wrong',
+      message: error,
     });
   }
 });
@@ -97,9 +97,9 @@ router.delete('/:id', async (req, res) => {
 
   try {
     const removedComment = await comments.remove(id);
-    res.status(200).json(removedComment);
+    res.status(200).json({ status: true, message: removedComment });
   } catch (error) {
-    res.status(500).json({ error: error });
+    res.status(500).json({ status: false, message: error });
   }
 });
 

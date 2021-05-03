@@ -4,6 +4,7 @@ const axios = require('axios');
 const errorValidator = require('../utils/errorValidation');
 const movies = require('../data/recommendedMovies');
 const comments = require('../data/comments');
+const commentRating = require('../data/commentRating');
 
 const router = express.Router();
 const { searchApi, imageApi, getMovie } = require('../api/api');
@@ -26,7 +27,29 @@ router.get('/', async (_, res) => {
   } catch (error) {
     res.status(500).json({
       status: false,
-      message: 'Something went wrong',
+      message: error,
+    });
+  }
+});
+
+//search movie based on value
+router.get('/search', async (req, res) => {
+  try {
+    const { searchTerm } = req.query;
+    if (!searchTerm) throw res.status(400).json({ message: 'You must pass search term!' });
+    const allMovies = await axios.get(searchApi(searchTerm));
+
+    //update poster link of movie to the poster_path
+    const finalPayload = appendPathToPoster(allMovies?.data?.results);
+
+    res.status(200).json({
+      status: true,
+      movies: finalPayload,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: false,
+      message: error,
     });
   }
 });
@@ -44,9 +67,32 @@ router.get('/:id', async (req, res) => {
 
     const movie = await movies.get(id);
     let finalPayload = movie;
+
     if (movie) {
       const allComments = await comments.getCommentsByMovie(id);
-      finalPayload = { ...movie, comments: allComments };
+
+      let finalCommentPayload = await Promise.all(
+        allComments.map(async (comment) => {
+          let ratingPayload = {
+            like: 0,
+            dislike: 0,
+          };
+          const commentsByRating = await commentRating.get(comment?._id.toString());
+
+          commentsByRating.map((c) => {
+            if (c?.status === 'like') {
+              ratingPayload = { ...ratingPayload, like: ratingPayload.like + 1 };
+            } else if (c?.status === 'dislike') {
+              ratingPayload = { ...ratingPayload, dislike: ratingPayload.dislike + 1 };
+            }
+          });
+
+          comment = { ...comment, rating: ratingPayload };
+          return comment;
+        })
+      );
+
+      finalPayload = { ...movie, comments: finalCommentPayload };
     }
 
     res.status(200).json({
@@ -56,28 +102,7 @@ router.get('/:id', async (req, res) => {
   } catch (error) {
     res.status(500).json({
       status: false,
-      message: 'Something went wrong',
-    });
-  }
-});
-
-//search movie based on value
-router.get('/search', async (req, res) => {
-  try {
-    const { searchTerm } = req.query;
-    const allMovies = await axios.get(searchApi(searchTerm));
-
-    //update poster link of movie to the poster_path
-    const finalPayload = appendPathToPoster(allMovies?.data?.results);
-
-    res.status(200).json({
-      status: true,
-      movies: finalPayload,
-    });
-  } catch (error) {
-    res.status(500).json({
-      status: false,
-      message: 'Something went wrong',
+      message: error,
     });
   }
 });
