@@ -27,7 +27,7 @@ const routeConstructor = (app) => {
 
   app.get('/addPopPage', async (req, res) => {
     res.render('ERS/addList/addPopPage');
-  }); 
+  });
 
   // for testing if server is alive
   app.use('/ping', (_, res) => res.send('pong'));
