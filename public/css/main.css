@@ -1,6 +1,7 @@
 body {
     background-color:white;
     margin: 0;  
+    padding-top: 52px;
 }
   
 #landing{
@@ -39,7 +40,7 @@ body {
   }
 
 .image li{
-    background: url("/public/img/main.jpeg");
+    background: url("/public/img/main.jpeg") no-repeat center center fixed;
     width: 100%;
     height: 100%;
     background-position: 50% 50%;
@@ -47,7 +48,7 @@ body {
     background-size: cover;
     color: white;
     height: 650px;
-    padding: 100px 0 0 0;   
+    padding: 100px 0 0 0;  
 }
 
 nav {
@@ -55,6 +56,7 @@ nav {
         position: absolute;
         top: 0;
         z-index: 99999999;
+       
 } 
 
 nav ul {
@@ -96,5 +98,106 @@ nav li:last-child
     float:right;
 }
 
+#container{
+position: relative;
+border: #EBEBEB 10px  solid;
+width: 100%;
+padding-right: 0px;
+padding-left: 0px;
+padding-bottom: 120px;
+margin-right: auto;
+margin-left: auto;
+text-align: left;
+} 
 
-  
+#headData{
+  background-color: #5d1df0;
+  display: block;
+  text-align: center;
+}
+
+.status-menu-container {
+  height: 46px;
+  background-color: #FFF;
+  border-bottom: #EBEBEB 1px solid;
+  z-index: 1;
+}
+
+.status-menu-container .status-menu {
+  display: table;
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 40px 0;
+}
+
+.status-menu-container .status-menu .status-button {
+  position: relative;
+  display: table-cell;
+  padding: 12px 0;
+  margin: 0;
+  font-family: 'Helvetica neue', Helvetica, "lucida grande", tahoma, verdana, arial, sans-serif;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 1.6em;
+  color: #9B9B9B;
+}
+
+div.form {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  width: 100%;
+}
+
+#search_term {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#inputButton{
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#showList{
+list-style-type: none;
+}  
+
+.libody {
+  background: lightyellow;
+  border: 2px solid yellow;
+  padding: 1rem;
+  margin-left: 50px;
+  margin-right: 100px;
+  pointer-events: none;
+  cursor: default;
+}
+
+.addButton{
+float: right;
+background-color: #4f74c8;
+border: #fff 0 solid;
+border-radius: 4px;
+color: #fff;
+pointer-events: all;
+cursor: pointer;
+display: inline-block;
+font-family: Avenir,lucida grande,tahoma,verdana,arial,sans-serif;
+font-size: 10px;
+line-height: 1.0em;
+padding: 4px 0;
+text-align: center;
+text-decoration: none;
+width: 36px;
+}
