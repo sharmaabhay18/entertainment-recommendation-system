@@ -10,9 +10,12 @@
                 Login
             </button>
             {{else}}
-            <button class="button" id="logout-button">
+            <form action="/users/logout" method="get" id="logout-form">
+            <button class="button" id="logout-button" for="logout-form">
                 logout
             </button>
+            </form>
+            
             {{/if}}
         </div>
     </nav>
