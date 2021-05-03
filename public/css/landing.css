@@ -1,0 +1,116 @@
+.landing-page{
+    background-image: url(./../images/main.jpeg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 100%;
+}
+
+.landing-container {
+    width: 450px;
+    background-color: #fff;
+    position: relative;
+    left: 62%;
+    top: 3%;
+    transition: all 0.5s linear;
+    border-radius: 6px ;
+    border-top-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+}
+.landing-container-show {
+    display: block;
+}
+
+
+.landing-container-hide-visiual{
+   opacity: 0;
+}
+
+.loading-form-close {
+    display: block;
+    position: absolute;
+    right: -12px;
+    width: 36px;
+    height: 36px;
+    background: #fff;
+    border: 1px solid;
+    text-align: center;
+    border-radius: 100%;
+    top: -13px;
+    font-size: 21px;
+}
+
+.form-haeder-panel{
+    background-color: #ce0c0c;
+    border-top-left-radius: 24px;
+    padding: 36px 0px;
+}
+
+.landing-forms{
+    height: 100%;
+}
+
+.login-page,.signup-page{
+    height: 100%;
+    display:flex;
+    flex-direction:column
+}
+.landing-container-hide {
+    display: none;
+}
+
+.padding-container{
+    padding: 21px 36px;
+}
+.login,.signup {
+    flex: 1;
+}
+.form-input {
+    width: 100%;
+    padding:8px 16px;
+    border: 0.5px solid #333;
+    border-radius: 8px;
+}
+.reduce-width{
+    width: 48%;
+}
+
+.form-input:focus {
+    border: 1px solid #333
+}
+
+.input-lable{
+    font-size: 18px;
+    font-weight: 600;
+}
+.form-button{
+    text-align: center;
+}
+.submit-button{
+    width:50%;
+    padding: 12px 12px;
+    border: none;
+    border-radius:24px;
+    margin-top:16px;
+    background-color: #ce0c0c;
+    color: #fff;
+    font-size: 18px;
+}
+
+.submit-button:disabled {
+    background-color: #f59ba4;
+    cursor: not-allowed;
+}
+
+.show-option {
+    text-align: center;
+    font-size:14px ;
+    border-top: 1px dotted #333;
+}
+.option-button{
+    font-size:18px;
+    color: #ce0c0c;
+   
+}
+.option-button:hover{
+   cursor: pointer;
+}

@@ -1,0 +1,28 @@
+body {
+    background-color:white;
+    margin: 0px;  
+    height: 100vh;
+}
+
+.main-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.header {
+  background-color: red;
+}
+
+.footer {
+  background-color: green;
+}
+
+.main-body{
+  height: 100%;
+background-color: yellow;
+display: flex;
+flex-direction:column
+}
+  

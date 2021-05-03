@@ -1,0 +1,96 @@
+  <div class="header">
+          {{>header loggIn=loggIn}}
+    </div>
+<div class="landing-page">
+
+    <div class="landing-container landing-container-hide landing-container-hide-visiual">
+        <div class="loading-form-close">
+            x
+        </div>
+        <div class="landing-forms">
+            <div class="login-page">
+                  <div class="form-haeder-panel">
+                 </div>
+                <form class="login padding-container" id="loginForm" action="/users/login" method="POST">
+                    <div class="form-group">
+                        <label class="d-block input-lable" for="username">
+                            Username
+                        </label>
+                         <input class="form-input" minlength="3" type="text" id="login-username" name="username" placeholder="Enter username"
+                                required="true" />
+                    </div>
+                    <div class="form-group">
+                        <label class="d-block input-lable" for="password">Password</label>
+                        <input class="form-input" minlength="5" type="password" id="login-password"
+                                name="password" placeholder="Enter password" required="true" /> 
+                    </div>
+                    <div class="form-button pt-2">
+                        <button id="login-submit" form="loginForm" class="submit-button" type="submit"
+                            value="submit" disabled="disabled">
+                            <b>Log in</b>
+                        </button>
+                    </div>
+                </form>
+                <div class="show-option padding-container">
+                    <div>
+                        Do not have account with us? No issues...
+                    </div>
+                    <div class="option-button" onclick="toggleForm()">
+                        Sign up
+                    </div>
+                </div>
+            </div>
+            <div class="signup-page landing-container-hide">
+                 <div class="form-haeder-panel">
+                 </div>
+                <form class="signup padding-container" id="registerForm"  action="/users/create" method="POST">
+                    <div class="form-group">
+                        <label class="d-block input-lable"for="username">Username</label>
+                        <input type="text" minlength="3" name="username" class="form-input" id="username" placeholder="Username"
+                            required='true'>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                         <div class="form-group d-inline-block reduce-width">
+                        <label class="d-block input-lable" for="firstname">First Name</label>
+                        <input type="text" class="form-input" name="firstname" id="firstname" placeholder="First name"
+                            required='true'>
+                    </div>
+                    <div class="form-group d-inline-block reduce-width">
+                        <label class="d-block input-lable"for="lastname">Last Name</label>
+                        <input type="text" class="form-input" name="lastname" id="lastname" placeholder="Last name"
+                            required='true'>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="d-block input-lable"for="email">Email address</label>
+                        <input type="email" name="email" class="form-input" id="email" aria-describedby="emailHelp"
+                            placeholder="Enter email" required='true'>
+                    </div>
+                    <div class="form-group">
+                        <label class="d-block input-lable" for="password">Password</label>
+                        <input type="password" name="password" minlength="5" class="form-input" id="password" placeholder="Password"
+                            required='true'>
+                    </div>
+                    <div class="form-button">
+                        <button id="signup-submit" form="registerForm" class="submit-button" type="submit"
+                            value="submit" disabled="disabled">
+                            <b>Sign up</b>
+                        </button>
+                    </div>
+                </form>
+                <div class="show-option padding-container">
+                    <div>
+                       Already have an account, Lets continue...
+                    </div>
+                    <div class="option-button" onclick="toggleForm()">
+                        Sign In
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+   <div class="footer">
+        {{>footer}}
+   </div>
