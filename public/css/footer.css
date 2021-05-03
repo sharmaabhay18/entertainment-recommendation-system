@@ -1,0 +1,8 @@
+.footer-panel{
+    padding: 16px 16px;
+    background: rgb(185,4,4);
+    background: radial-gradient(circle, rgba(185,4,4,1) 0%, rgba(255,64,64,1) 50%, rgba(255,82,82,1) 100%);
+    text-align: center;
+    color: #111;
+    font-size: 16px;
+}

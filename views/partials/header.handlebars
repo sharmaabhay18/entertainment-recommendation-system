@@ -1,0 +1,19 @@
+  <link rel="stylesheet" href="/css/header.css">
+<header>
+    <nav class="header-nav">
+        <div class="title">
+            Entertainment Recommendation System
+        </div>
+        <div>
+            {{#if loggIn}}
+            <button class="button" id="login-button">
+                Login
+            </button>
+            {{else}}
+            <button class="button" id="logout-button">
+                logout
+            </button>
+            {{/if}}
+        </div>
+    </nav>
+</header>
