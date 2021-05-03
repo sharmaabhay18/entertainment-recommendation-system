@@ -1,0 +1,18 @@
+{{>header}}
+
+<div class="container">
+    <div class="form">
+        <form method="POST" id='searchForm'>
+            <input type="text" name="serachTerm" id="search_term" size="43"
+                placeholder="Search for Movie to add to your list" required />
+            <button type="submit" id="inputButton">Submit</button>
+        </form>
+    </div>
+
+    <div id="error" class="error" hidden>I'm an error</div>
+    <br>
+
+    <ul id="showList"></ul>
+
+    <div id="show" hidden></div>
+</div>
