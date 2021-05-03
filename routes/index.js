@@ -1,9 +1,9 @@
 const usersRoutes = require('./users');
-const addList = require('./addList')
+const addList = require('./addList');
 
 const routeConstructor = (app) => {
   app.use('/users', usersRoutes);
-  app.use('/addList',addList);
+  app.use('/addList', addList);
 
   app.get('/', (req, res) => {
     res.render('ERS/landing');
@@ -11,7 +11,7 @@ const routeConstructor = (app) => {
 
   app.get('/addPopPage', async (req, res) => {
     res.render('ERS/addList/addPopPage');
-  }); 
+  });
 
   // for testing if server is alive
   app.use('/ping', (_, res) => res.send('pong'));
