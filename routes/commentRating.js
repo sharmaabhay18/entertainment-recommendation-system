@@ -1,8 +1,10 @@
+const { ObjectId } = require('mongodb');
 const express = require('express');
 
 const errorValidator = require('../utils/errorValidation');
 const { isStatusValid } = require('../utils/commentRatingEnum');
 const commentRating = require('../data/commentRating');
+const comments = require('../data/comments');
 
 const router = express.Router();
 
@@ -30,21 +32,27 @@ router.post('/', async (req, res) => {
   }
 
   try {
+    await comments.getCommentByObjId(ObjectId(commentId));
+  } catch (error) {
+    return res.status(404).json({ message: error });
+  }
+
+  try {
     const commentRatingPayload = {
       userId,
       commentId,
       status,
     };
 
-    const isCommentPresentForUser = await commentRating.getByUserId(userId);
+    const isCommentPresentForUser = await commentRating.getByUserId(userId, commentId);
 
-    if (isCommentPresentForUser.length === 1) {
+    if (isCommentPresentForUser && isCommentPresentForUser.length === 1) {
       if (isCommentPresentForUser[0].status === 'like' && status === 'like') {
         return res.status(400).json({ message: 'User has already liked the comment' });
       } else if (isCommentPresentForUser[0].status === 'dislike' && status === 'dislike') {
         return res.status(400).json({ message: 'User has already disliked the comment' });
       }
-    } else if (isCommentPresentForUser.length >= 2) {
+    } else if (isCommentPresentForUser && isCommentPresentForUser.length >= 2) {
       return res.status(400).json({ message: 'User has already liked/disliked the comment' });
     }
 

@@ -4,17 +4,21 @@ const errorValidator = require('../utils/errorValidation');
 
 const commentRating = mongoCollections.comment_rating;
 
-const getByUserId = async (userId) => {
+const getByUserId = async (userId, commentId) => {
   try {
-    if (userId === undefined) throw 'User id args is required';
+    if (!userId) throw 'User id args is required';
+    if (!commentId) throw 'Comment id args is required';
 
     errorValidator.validateObjectId(userId, 'User id');
+    errorValidator.validateObjectId(commentId, 'Comment id');
 
     const commentRatingCollection = await commentRating();
 
-    const commentsByUserId = await commentRatingCollection.find({ user_id: userId }).toArray();
+    const commentsByUserId = await commentRatingCollection
+      .find({ $and: [{ user_id: userId }, { comment_id: commentId }] })
+      .toArray();
 
-    if (commentsByUserId === null) return {};
+    if (commentsByUserId === null) throw 'No comments found to update the ratings for comment';
 
     return commentsByUserId;
   } catch (error) {

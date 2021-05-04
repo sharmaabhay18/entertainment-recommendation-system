@@ -29,7 +29,7 @@ const get = async (id) => {
     _id: ObjectId(id),
   });
 
-  if (movieById === null) return [];
+  if (movieById === null) throw 'No movie found with given id';
 
   return movieById;
 };
@@ -44,7 +44,7 @@ const getByExternalId = async (id) => {
     externalId: id,
   });
 
-  if (movieById === null) return [];
+  if (movieById === null) throw 'No movie found with given id';
 
   return movieById;
 };

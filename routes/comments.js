@@ -4,6 +4,7 @@ const express = require('express');
 const errorValidator = require('../utils/errorValidation');
 
 const comments = require('../data/comments');
+const movies = require('../data/recommendedMovies');
 
 const router = express.Router();
 
@@ -24,6 +25,12 @@ router.post('/add', async (req, res) => {
       errorValidator.validateObjectId(userId, 'User id');
     } catch (error) {
       return res.status(400).json({ message: error });
+    }
+
+    try {
+      await movies.get(movieId);
+    } catch (error) {
+      return res.status(404).json({ message: error });
     }
 
     const commentPayload = {
@@ -60,6 +67,12 @@ router.post('/update', async (req, res) => {
     errorValidator.validateObjectId(commentId, 'Comment id');
   } catch (error) {
     return res.status(400).json({ message: error });
+  }
+
+  try {
+    await comments.getCommentByObjId(ObjectId(commentId));
+  } catch (error) {
+    return res.status(404).json({ message: error });
   }
 
   try {
