@@ -17,6 +17,21 @@ const getCommentsByMovie = async (id) => {
   }
 };
 
+const authorizedComment = async (id, userId) => {
+  if (!id) throw 'You must provide a comment id';
+  if (!userId) throw 'You must provide a user id';
+
+  errorValidator.validateObjectId(id, 'Comment id');
+  errorValidator.validateObjectId(userId, 'User id');
+
+  const commentCollection = await comments();
+  const foundComment = await commentCollection.findOne({ $and: [{ _id: ObjectId(id) }, { user_id: userId }] });
+
+  if (foundComment === null) throw 'You are not allowed to updated/deleted this comment';
+
+  return { ...foundComment, _id: foundComment?._id?.toString() };
+};
+
 const getCommentByObjId = async (id) => {
   if (!id) throw 'You must provide an id';
 
@@ -100,4 +115,5 @@ module.exports = {
   create,
   remove,
   getCommentByObjId,
+  authorizedComment,
 };
