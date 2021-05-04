@@ -125,7 +125,7 @@ text-align: left;
   display: table;
   margin: 0 auto;
   border-collapse: separate;
-  border-spacing: 40px 0;
+  border-spacing: 20px 0;
 }
 
 .status-menu-container .status-menu .status-button {
@@ -172,12 +172,14 @@ div.form {
 list-style-type: none;
 }  
 
+
 .libody {
   background: lightyellow;
   border: 2px solid yellow;
+  border-top: 0;
   padding: 1rem;
-  margin-left: 50px;
-  margin-right: 100px;
+  margin-left: 150px;
+  margin-right: 170px;
   pointer-events: none;
   cursor: default;
 }
@@ -198,4 +200,96 @@ padding: 4px 0;
 text-align: center;
 text-decoration: none;
 width: 36px;
+}
+
+#addHeader{
+  background-color: #4f74c8;
+  border-width: 0;
+  color: #fff;
+  font-family: Avenir,lucida grande,tahoma,verdana,arial,sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  margin-left: 150px;
+  margin-right: 170px;  
+  padding: 2px 0;
+  text-align: center;
+}
+
+#addHeader2{
+  background-color: #4f74c8;
+  border-width: 0;
+  color: #fff;
+  font-family: Avenir,lucida grande,tahoma,verdana,arial,sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  margin-left: 150px;
+  margin-right: 170px;;  
+  padding: 2px 0;
+  text-align: center;
+}
+
+.inputtext {
+  border-color: #d8d8d8;
+  border-style: solid;
+  border-width: 1px;
+  font-family: lucida grande,tahoma,verdana,arial,sans-serif;
+  font-size: 11px;
+  padding: 2px;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+#addButton1{
+  background-color: #4f74c8;
+  border: #fff 0 solid;
+  border-radius: 4px;
+  color: #fff;
+  pointer-events: all;
+  cursor: pointer;
+  font-family: Avenir,lucida grande,tahoma,verdana,arial,sans-serif;
+  font-size: 10px;
+  line-height: 1.0em;
+  padding: 4px 0;
+  text-align: center;
+  text-decoration: none;
+  width: 36px;
+  }
+
+#addButton2{
+  display:inline-block;
+    background-color: #4f74c8;
+    border: #fff 0 solid;
+    border-radius: 4px;
+    color: #fff;
+    pointer-events: all;
+    cursor: pointer;
+    font-family: Avenir,lucida grande,tahoma,verdana,arial,sans-serif;
+    font-size: 10px;
+    line-height: 1.0em;
+    padding: 4px 0;
+    text-align: center;
+    text-decoration: none;
+    width: 36px;
+    margin-left: 5px;
+    }
+
+span{
+      color: red;
+}
+
+tbody {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+} 
+
+.list-table {
+  width: 100%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  border: #EBEBEB 1px solid;
+}
+
+select{
+  pointer-events: all;
 }
