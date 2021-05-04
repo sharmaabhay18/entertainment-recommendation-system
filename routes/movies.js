@@ -16,6 +16,38 @@ const appendPathToPoster = (movies) => {
   });
 };
 
+const updateRating = async (isMoviePresent, rating, userId) => {
+  const { _id, rating: movieRating } = isMoviePresent;
+  let tempRating = movieRating;
+  const [isRatingPresent] = tempRating.user_rating.filter((u) => u.user_id === userId);
+
+  const userRating = {
+    user_id: userId,
+    value: rating,
+  };
+  if (isRatingPresent) {
+    tempRating.user_rating = tempRating.user_rating.map((r) => {
+      if (r.user_id === isRatingPresent.user_id) {
+        r.value = rating;
+        return r;
+      }
+      return r;
+    });
+  } else {
+    tempRating.user_rating.push(userRating);
+  }
+
+  //calculate average rating for movie
+  let newAverage = 0;
+  if (tempRating?.user_rating.length === 1) {
+    newAverage = rating;
+  } else {
+    newAverage = tempRating?.user_rating.reduce((a, b) => a.value + b.value) / tempRating?.user_rating.length;
+  }
+  tempRating.average = newAverage;
+  await movies.update(_id, tempRating);
+};
+
 //get all movies
 router.get('/', async (_, res) => {
   try {
@@ -107,17 +139,90 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+//update rating and status of movie
+router.patch('/update', async (req, res) => {
+  try {
+    const { status, externalId, userId, rating } = req.body;
+
+    if (!externalId) throw 'You must provide externalId for movie';
+    if (!userId) throw 'You must provide userId for movie';
+    if (!rating && !status) throw 'You must provide either rating/status to update';
+    if (rating) {
+      if (typeof rating !== 'number') {
+        return res.status(400).json({ status: false, message: 'Rating must be of number type' });
+      }
+      if (rating < 1 || rating > 5) {
+        return res.status(400).json({ status: false, message: 'Rating must be in range of 1 - 5' });
+      }
+
+      if (rating % 1 !== 0) {
+        return res.status(400).json({ status: false, message: 'Please enter whole number with range of 1 - 5' });
+      }
+    }
+
+    if (status) {
+      if (typeof status !== 'string' || status?.trim()?.length === 0)
+        return res
+          .status(400)
+          .json({ status: false, message: 'Please make sure status is of string type and is non empty' });
+    }
+
+    try {
+      errorValidator.validateObjectId(userId, 'User id');
+    } catch (error) {
+      return res.status(400).json({ message: error });
+    }
+
+    const parseExtId = parseInt(externalId);
+    const isMoviePresent = await movies.getByExternalId(parseExtId);
+    if (isMoviePresent.length === 0) {
+      return res.status(400).json({ status: false, message: 'No movie present to update' });
+    } else if (rating) {
+      updateRating(isMoviePresent, rating, userId);
+    }
+
+    //TO-Do: Find user and update status
+    res.status(200).json({
+      status: true,
+      message: 'Updated successfully',
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: false,
+      message: error,
+    });
+  }
+});
 //add movie implictly if not present to our
 //db when user is adding movie to their list
 router.post('/add-movie', async (req, res) => {
   try {
-    const { status, externalId, userId } = req.body;
+    const { status, externalId, userId, rating } = req.body;
     if (!externalId) throw 'You must provide externalId for movie';
     if (!status) throw 'You must provide status for movie';
     if (!userId) throw 'You must provide userId for movie';
+    if (!rating) throw 'You must provide rating for movie';
+    if (typeof rating !== 'number') {
+      return res.status(400).json({ status: false, message: 'Rating must be of number type' });
+    }
+    if (rating < 1 || rating > 5) {
+      return res.status(400).json({ status: false, message: 'Rating must be in range of 1 - 5' });
+    }
+
+    if (rating % 1 !== 0) {
+      return res.status(400).json({ status: false, message: 'Please enter whole number with range of 1 - 5' });
+    }
 
     if (typeof status !== 'string' || status?.trim()?.length === 0)
-      throw 'Please make sure status is of string type and is non empty';
+      return res
+        .status(400)
+        .json({ status: false, message: 'Please make sure status is of string type and is non empty' });
+
+    try {
+      errorValidator.validateObjectId(userId, 'User id');
+    } catch (error) {
+      return res.status(400).json({ message: error });
+    }
 
     const parseExtId = parseInt(externalId);
     const isMoviePresent = await movies.getByExternalId(parseExtId);
@@ -127,7 +232,10 @@ router.post('/add-movie', async (req, res) => {
       const movieById = await axios.get(getMovie(parseExtId));
       const movieData = [movieById.data];
       const [updatedMovie] = appendPathToPoster(movieData);
-      await movies.create(updatedMovie);
+      await movies.create(updatedMovie, rating, userId);
+    } else {
+      //update movie rating based on user ratings
+      updateRating(isMoviePresent, rating, userId);
     }
 
     //TO-Do: Find user and add movie to their list with status
