@@ -44,7 +44,7 @@ const getByExternalId = async (id) => {
     externalId: id,
   });
 
-  if (movieById === null) throw 'No movie found with given id';
+  if (movieById === null) return [];
 
   return movieById;
 };
@@ -82,13 +82,11 @@ const create = async (
   if (!id) throw 'Id is missing from third party api';
   if (!userId) throw 'Please provide user id for adding movie';
   if (!rating) throw 'Please provide rating for adding movie';
-  if (!budget) throw 'budget is missing from third party api';
   if (!genres) throw 'genres is missing from third party api';
   if (!title) throw 'title is missing from third party api';
   if (!overview) throw 'overview is missing from third party api';
   if (!poster_path) throw 'poster_path is missing from third party api';
   if (!release_date) throw 'release_date is missing from third party api';
-  if (!revenue) throw 'revenue is missing from third party api';
   if (!status) throw 'status is missing from third party api';
   if (!tagline) throw 'tagline is missing from third party api';
   if (!original_language) throw 'original_language is missing from third party api';

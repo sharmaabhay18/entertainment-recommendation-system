@@ -5,6 +5,7 @@ const errorValidator = require('../utils/errorValidation');
 const { isStatusValid } = require('../utils/commentRatingEnum');
 const commentRating = require('../data/commentRating');
 const comments = require('../data/comments');
+const { users } = require('../data');
 
 const router = express.Router();
 
@@ -33,6 +34,12 @@ router.post('/', async (req, res) => {
 
   try {
     await comments.getCommentByObjId(ObjectId(commentId));
+  } catch (error) {
+    return res.status(404).json({ message: error });
+  }
+
+  try {
+    await users.getUserById(userId);
   } catch (error) {
     return res.status(404).json({ message: error });
   }
@@ -89,6 +96,12 @@ router.delete('/', async (req, res) => {
       errorValidator.validateObjectId(userId, 'User id');
     } catch (error) {
       return res.status(400).json({ message: error });
+    }
+
+    try {
+      await users.getUserById(userId);
+    } catch (error) {
+      return res.status(404).json({ message: error });
     }
 
     const removedCommentRating = await commentRating.remove(userId, status);

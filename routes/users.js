@@ -2,37 +2,58 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 
 const router = express.Router();
+const movies = require('../data/recommendedMovies');
 const { users } = require('../data');
 
 router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-  if (!username || !password) {
-    res.status(400).json({ error: 'All fields are mandatory' });
-    return;
-  }
-  if (typeof username !== 'string' || typeof password !== 'string') {
-    res.status(400).json({ error: 'invalid format for username/password' });
-    return;
-  }
-  if (!username.trim().length || !password.trim().length) {
-    res.status(400).json({ error: 'username cant be empty string' });
-    return;
-  }
-
-  let user = await users.getUserByUsername(username);
-  if (user) {
-    let match = await bcrypt.compare(password, user.password);
-    if (match) {
-      req.session.user = user;
-      res.status(200).json({ status: true, message: 'Login successfull' });
-      //redirect user to home page
-    } else {
-      res.status(400).json({ status: false, message: 'Invalid password' });
-      // password did not matched
+  try {
+    const { username, password } = req.body;
+    if (!username || !password) {
+      res.status(400).json({ error: 'All fields are mandatory' });
+      return;
     }
-  } else {
-    res.status(404).json({ status: false, message: 'User not found' });
-    //user not found
+    if (typeof username !== 'string' || typeof password !== 'string') {
+      res.status(400).json({ error: 'invalid format for username/password' });
+      return;
+    }
+    if (!username.trim().length || !password.trim().length) {
+      res.status(400).json({ error: 'username cant be empty string' });
+      return;
+    }
+
+    let user = await users.getUserByUsername(username);
+    if (user) {
+      let match = await bcrypt.compare(password, user.password);
+      if (match) {
+        const finalMoviePayload = await Promise.all(
+          user?.movies?.map(async (movie) => {
+            const isMoviePresent = await movies.getByExternalId(parseInt(movie?.external_id));
+            if (isMoviePresent) {
+              return { ...movie, movieDetails: isMoviePresent };
+            }
+            throw 'Something went wrong while populating movies';
+          })
+        );
+
+        user.movies = finalMoviePayload;
+
+        req.session.user = user;
+
+        res.status(200).json({ status: true, message: 'Login successfull' });
+        //redirect user to home page
+      } else {
+        res.status(400).json({ status: false, message: 'Invalid password' });
+        // password did not matched
+      }
+    } else {
+      res.status(404).json({ status: false, message: 'User not found' });
+      //user not found
+    }
+  } catch (error) {
+    res.status(500).json({
+      status: false,
+      message: error,
+    });
   }
 });
 
