@@ -23,7 +23,6 @@
   "homepage": "https://github.com/sharmaabhay18/entertainment-recommendation-system#readme",
   "dependencies": {
     "axios": "^0.21.1",
-    "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.0",

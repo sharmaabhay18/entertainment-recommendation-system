@@ -5,7 +5,7 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 const hbs = require('hbs');
 const session = require('express-session');
-const configRoutes = require('./routes');
+const routeConstructor = require('./routes');
 const helper = require('./utils/helperFunction');
 
 const publicDirectoryPath = path.join(__dirname, './public');
@@ -37,5 +37,5 @@ app.use(
   })
 );
 
-configRoutes(app);
+routeConstructor(app);
 app.listen(3000, () => console.log('Server started at 3000'));
