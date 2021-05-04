@@ -1,11 +1,15 @@
 const usersRoutes = require('./users');
 const moviesRoutes = require('./movies');
-const ratingRoutes = require('./rating');
 const commentRoutes = require('./comments');
 const commentRatingRoutes = require('./commentRating');
 
 const routeConstructor = (app) => {
   app.use('/users', usersRoutes);
+
+  app.use('/movies', moviesRoutes);
+  app.use('/comment', commentRoutes);
+  app.use('/commentRating', commentRatingRoutes);
+
   app.use('/', (req, res) => {
     if (req.session.user) {
       // res.status(200).send(req.session.user)
@@ -21,10 +25,6 @@ const routeConstructor = (app) => {
       });
     }
   });
-  app.use('/movies', moviesRoutes);
-  app.use('/rating', ratingRoutes);
-  app.use('/comment', commentRoutes);
-  app.use('/commentRating', commentRatingRoutes);
 
   // for testing if server is alive
   app.use('/ping', (_, res) => res.send('pong'));
