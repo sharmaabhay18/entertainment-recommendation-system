@@ -5,6 +5,9 @@ const commentRatingRoutes = require('./commentRating');
 
 const routeConstructor = (app) => {
   app.use('/users', usersRoutes);
+  app.use('/movies', moviesRoutes);
+  app.use('/comment', commentRoutes);
+  app.use('/commentRating', commentRatingRoutes);
 
   app.use('/movies', moviesRoutes);
   app.use('/comment', commentRoutes);
