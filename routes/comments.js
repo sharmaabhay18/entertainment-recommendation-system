@@ -5,6 +5,7 @@ const errorValidator = require('../utils/errorValidation');
 
 const comments = require('../data/comments');
 const movies = require('../data/recommendedMovies');
+const { users } = require('../data');
 
 const router = express.Router();
 
@@ -29,6 +30,12 @@ router.post('/add', async (req, res) => {
 
     try {
       await movies.get(movieId);
+    } catch (error) {
+      return res.status(404).json({ message: error });
+    }
+
+    try {
+      await users.getUserById(userId);
     } catch (error) {
       return res.status(404).json({ message: error });
     }

@@ -5,6 +5,7 @@ const errorValidator = require('../utils/errorValidation');
 const movies = require('../data/recommendedMovies');
 const comments = require('../data/comments');
 const commentRating = require('../data/commentRating');
+const { users } = require('../data');
 
 const router = express.Router();
 const { searchApi, imageApi, getMovie } = require('../api/api');
@@ -13,6 +14,13 @@ const appendPathToPoster = (movies) => {
   return movies.map((movie) => {
     movie.poster_path = imageApi(movie.poster_path);
     return movie;
+  });
+};
+
+const isUserAuthenticated = (user, res) => {
+  return res.status(403).json({
+    status: false,
+    message: 'User is not authenticated',
   });
 };
 
@@ -67,6 +75,10 @@ router.get('/', async (_, res) => {
 //search movie based on value
 router.get('/search', async (req, res) => {
   try {
+    if (!req.session?.user) {
+      return isUserAuthenticated(req.session?.user, res);
+    }
+
     const { searchTerm } = req.query;
     if (!searchTerm) throw res.status(400).json({ message: 'You must pass search term!' });
     const allMovies = await axios.get(searchApi(searchTerm));
@@ -74,12 +86,12 @@ router.get('/search', async (req, res) => {
     //update poster link of movie to the poster_path
     const finalPayload = appendPathToPoster(allMovies?.data?.results);
 
-    res.status(200).json({
+    return res.status(200).json({
       status: true,
       movies: finalPayload,
     });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       status: false,
       message: error,
     });
@@ -142,6 +154,10 @@ router.get('/:id', async (req, res) => {
 //update rating and status of movie
 router.patch('/update', async (req, res) => {
   try {
+    if (!req.session?.user) {
+      return isUserAuthenticated(req.session?.user, res);
+    }
+
     const { status, externalId, userId, rating } = req.body;
 
     if (!externalId) throw 'You must provide externalId for movie';
@@ -168,20 +184,47 @@ router.patch('/update', async (req, res) => {
     }
 
     try {
+      errorValidator.isMovieStatusValid(status);
+    } catch (error) {
+      return res.status(400).json({ message: error });
+    }
+
+    try {
       errorValidator.validateObjectId(userId, 'User id');
     } catch (error) {
       return res.status(400).json({ message: error });
     }
 
+    try {
+      await users.getUserById(userId);
+    } catch (error) {
+      return res.status(404).json({ message: error });
+    }
+
     const parseExtId = parseInt(externalId);
     const isMoviePresent = await movies.getByExternalId(parseExtId);
+
     if (isMoviePresent.length === 0) {
       return res.status(400).json({ status: false, message: 'No movie present to update' });
     } else if (rating) {
       updateRating(isMoviePresent, rating, userId);
     }
 
-    //TO-Do: Find user and update status
+    //update user status for movie
+    const updatedUser = await users.updateMovieList(userId, { externalId, status });
+
+    const finalMoviePayload = await Promise.all(
+      updatedUser?.movies?.map(async (movie) => {
+        const isMoviePresent = await movies.getByExternalId(parseInt(movie?.external_id));
+        if (isMoviePresent) {
+          return { ...movie, movieDetails: isMoviePresent };
+        }
+        throw 'Something went wrong while populating movies';
+      })
+    );
+    updatedUser.movies = finalMoviePayload;
+    req.session.user = updatedUser;
+
     res.status(200).json({
       status: true,
       message: 'Updated successfully',
@@ -197,6 +240,10 @@ router.patch('/update', async (req, res) => {
 //db when user is adding movie to their list
 router.post('/add-movie', async (req, res) => {
   try {
+    if (!req.session?.user) {
+      return isUserAuthenticated(req.session?.user, res);
+    }
+
     const { status, externalId, userId, rating } = req.body;
     if (!externalId) throw 'You must provide externalId for movie';
     if (!status) throw 'You must provide status for movie';
@@ -219,9 +266,21 @@ router.post('/add-movie', async (req, res) => {
         .json({ status: false, message: 'Please make sure status is of string type and is non empty' });
 
     try {
+      errorValidator.isMovieStatusValid(status);
+    } catch (error) {
+      return res.status(400).json({ message: error });
+    }
+
+    try {
       errorValidator.validateObjectId(userId, 'User id');
     } catch (error) {
       return res.status(400).json({ message: error });
+    }
+
+    try {
+      await users.getUserById(userId);
+    } catch (error) {
+      return res.status(404).json({ message: error });
     }
 
     const parseExtId = parseInt(externalId);
@@ -238,7 +297,21 @@ router.post('/add-movie', async (req, res) => {
       updateRating(isMoviePresent, rating, userId);
     }
 
-    //TO-Do: Find user and add movie to their list with status
+    //update user status for movie
+    const updatedUser = await users.updateMovieList(userId, { externalId, status });
+
+    const finalMoviePayload = await Promise.all(
+      updatedUser?.movies?.map(async (movie) => {
+        const isMoviePresent = await movies.getByExternalId(parseInt(movie?.external_id));
+        if (isMoviePresent) {
+          return { ...movie, movieDetails: isMoviePresent };
+        }
+        throw 'Something went wrong while populating movies';
+      })
+    );
+    updatedUser.movies = finalMoviePayload;
+    req.session.user = updatedUser;
+
     res.status(200).json({
       status: true,
       message: 'Movie added successfully',

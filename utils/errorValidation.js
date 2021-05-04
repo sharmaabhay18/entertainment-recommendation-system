@@ -8,6 +8,14 @@ const validateObjectId = (id, value) => {
   if (!parsedId) throw `${value} passed is not a valid object id`;
 };
 
+const isMovieStatusValid = (movieStatus) => {
+  const status = ['inprogress', 'dropped', 'completed', 'onhold', 'plantowatch'];
+
+  const [isMovieStatusPresent] = status.filter((s) => s === movieStatus.replace(/\s/g, '').toLocaleLowerCase());
+  if (!isMovieStatusPresent) throw 'Movie status is invalid';
+};
+
 module.exports = {
   validateObjectId,
+  isMovieStatusValid,
 };

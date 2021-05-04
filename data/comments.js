@@ -63,11 +63,12 @@ const create = async (commentPayload) => {
 
 const update = async (id, payload) => {
   try {
+    if (!id) throw 'You must provide the id';
     errorValidator.validateObjectId(id, 'Comment id');
     const commentsCollection = await comments();
     const updateComment = await commentsCollection.updateOne({ _id: ObjectId(id) }, { $set: { message: payload } });
 
-    if (!updateComment.matchedCount && !updateComment.modifiedCount) throw 'Could not update book';
+    if (!updateComment.matchedCount && !updateComment.modifiedCount) throw 'Could not update comment';
 
     return await getCommentByObjId(ObjectId(id));
   } catch (error) {
@@ -77,6 +78,7 @@ const update = async (id, payload) => {
 
 const remove = async (id) => {
   try {
+    if (!id) throw 'You must provide the id';
     errorValidator.validateObjectId(id, 'Comment id');
     const commentsCollection = await comments();
     const deletionInfo = await commentsCollection.deleteOne({

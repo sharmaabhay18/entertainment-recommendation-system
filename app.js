@@ -31,11 +31,33 @@ app.use(express.static(publicDirectoryPath));
 app.use(
   session({
     name: 'AuthCookie',
-    secret: 'some secret string!',
+    secret: 'Our world is flat!',
     saveUninitialized: true,
     resave: false,
   })
 );
+
+app.use('/comment', (req, res, next) => {
+  if (!req.session.user) {
+    return res.status(403).json({
+      status: false,
+      message: 'User is not authenticated',
+    });
+  } else {
+    next();
+  }
+});
+
+app.use('/commentRating', (req, res, next) => {
+  if (!req.session.user) {
+    return res.status(403).json({
+      status: false,
+      message: 'User is not authenticated',
+    });
+  } else {
+    next();
+  }
+});
 
 routeConstructor(app);
 app.listen(3000, () => console.log('Server started at 3000'));
