@@ -27,7 +27,7 @@ const authorizedComment = async (id, userId) => {
   const commentCollection = await comments();
   const foundComment = await commentCollection.findOne({ $and: [{ _id: ObjectId(id) }, { user_id: userId }] });
 
-  if (foundComment === null) throw 'You are not allowed to updated/deleted this comment';
+  if (foundComment === null) throw 'You are not authorized to manipulate!';
 
   return { ...foundComment, _id: foundComment?._id?.toString() };
 };
