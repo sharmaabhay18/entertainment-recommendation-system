@@ -9,10 +9,6 @@ const routeConstructor = (app) => {
   app.use('/comment', commentRoutes);
   app.use('/commentRating', commentRatingRoutes);
 
-  app.use('/movies', moviesRoutes);
-  app.use('/comment', commentRoutes);
-  app.use('/commentRating', commentRatingRoutes);
-
   app.use('/', (req, res) => {
     if (req.session.user) {
       // res.status(200).send(req.session.user)
