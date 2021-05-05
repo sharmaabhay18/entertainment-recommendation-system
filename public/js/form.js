@@ -18,6 +18,7 @@ const divElem = document.getElementById('show');
           method: 'GET',
           url: ' http://api.tvmaze.com/search/shows?q=' + textInput.value,
         };
+
         $.ajax(pageLaod).then(function (responseMessage) {
           const html = `<div id="addHeader" style="display: none;">Movies</div>`;
           $('#showList').append(html);

@@ -2,6 +2,7 @@ const usersRoutes = require('./users');
 const moviesRoutes = require('./movies');
 const commentRoutes = require('./comments');
 const commentRatingRoutes = require('./commentRating');
+const addList = require('./addList');
 
 const routeConstructor = (app) => {
   app.use('/addList', addList);
