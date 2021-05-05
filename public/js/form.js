@@ -62,7 +62,7 @@ const divElem = document.getElementById('show');
           `<hr>` +
           `<label for="Status">Status<span>*</span> : </label>` +
           `<select name="status" id="status" class ="inputtext" required>
-            <option value="">Select status</option>
+            <option value="0">Select status</option>
             <option value="1">Currently Watching</option>
             <option value="2">Completed</option>
             <option value="3">On-Hold</option>
@@ -70,7 +70,7 @@ const divElem = document.getElementById('show');
           `<br/>` +
           `<label for="score">Rating<span>*</span> : </label>` +
           `<select name="score" id="rating" class ="inputtext" required>
-            <option value="">Select score</option>
+            <option value="0">Select score</option>
             <option value="5">(5) Masterpiece</option>
             <option value="4">(4) Great</option>
             <option value="3">(3) Very Good</option>
@@ -102,18 +102,15 @@ const divElem = document.getElementById('show');
       $('#showList').hide();
       let status = $('#status').val();
       let rating = $('#rating').val();
-      $('#addHeader2').show();
-      $("#list-table").show();
-      let html1 =
-          `<tr>` +
-          `<td>Name</td>` +
-          `<td>${status}</td>` +
-          `<td>${rating}</td>` +
-          `<button type="submit" id="editButton" >edit</button>` +
-          `</tr>`;
-      $("#list-table").append(html1);
-      $("#movieForm").attr("action","/addList");
+      if(status != 0 && rating != 0){
+        $('#movieForm').attr('action', '/addList');
+      }else{
+        event.preventDefault();
+        alert("Please provide all required fields")
+        $('#addHeader2').show();
+        $('#show').show();
+      }
+      
     });
   });
-
 })(window.jQuery);

@@ -3,7 +3,7 @@
 <div class="container" id="container">
     <div id="headData">
         <h1>MyList</h1>
-        <p>HOW MUCH MOVIES HAVE YOU SEEN?.</p>
+        <p>HOW MUCH MOVIES HAVE YOU SEEN?</p>
     </div>
 
     <div class="status-menu-container">
@@ -18,10 +18,32 @@
         </div>
     </div>
 
+    <div id="addHeader3">All Movie</div>
 
-    <div id="addHeader2" style="display: none;">All Movie</div>
 
-    <tbody id="list-table" style="display: none;"></tbody>
+    <table data-items="[]" class="list-table">
+        <tbody>
+            <tr class="list-table-header">
+                <th></th>
+                <th>#</th>
+                <th>Image</th>
+                <th>Movie Title</th>
+                <th>status</th>
+                <th>Rating</th>
+            </tr>
+        </tbody>
+    </table>
+
+    <tbody class="list-item">
+        <tr class="list-table-data">
+            <td></td>
+            <td>Image</td>
+            <td>Movie Title</td>
+            <td>status</td>
+            <td>Rating</td>
+            <td><a href="#" class="edit">Edit</a></td>
+        </tr>
+    </tbody>
 
 </div>
 
