@@ -7,6 +7,7 @@ const divElem = document.getElementById('show');
 (function ($) {
   if (myForm) {
     myForm.addEventListener('submit', (event) => {
+      let enteredVal = textInput.value;
       event.preventDefault();
 
       if (textInput.value.trim()) {
@@ -16,20 +17,31 @@ const divElem = document.getElementById('show');
         $('#show').hide();
         let pageLaod = {
           method: 'GET',
-          url: ' http://api.tvmaze.com/search/shows?q=' + textInput.value,
+          url: ' /movies/search?searchTerm=' + textInput.value,
         };
 
         $.ajax(pageLaod).then(function (responseMessage) {
-          const html = `<div id="addHeader" style="display: none;">Movies</div>`;
+          if(responseMessage.movies.length !==0){
+            const html = `<div id="addHeader" style="display: none;">Movies</div>`;
           $('#showList').append(html);
           $('#addHeader').show();
-          responseMessage.map((e) => {
+          responseMessage.movies.map((e) => {
+            let release_dateCheck = e.release_date ? e.release_date  : 'NA';
             $('#showList').show();
             let li = document.createElement('li');
-            li.innerHTML = `<a href="">${e.show.name}</a> <a href="" class="addButton" id="${e.show.name}">Add</a>`;
+            li.innerHTML = `<a href="">${e.title}</a>`+
+            `<p><strong>Release Date : </strong>${release_dateCheck}<p>`+
+            `<a href="" class="addButton" id="${e.title}">Add</a>`;
             li.setAttribute('class', 'libody');
             myUl.appendChild(li);
           });
+          }else{
+            $('#showList').empty();
+            $('#showList').hide();
+            errorDiv.hidden = false;
+            errorDiv.innerHTML = 'No result found for ' + enteredVal ;
+            textInput.focus();
+          }
         });
         myForm.reset();
         textInput.focus();
@@ -53,21 +65,29 @@ const divElem = document.getElementById('show');
       let urll = $(this).attr('id');
       let pageLaod = {
         method: 'GET',
-        url: 'http://api.tvmaze.com/search/shows?q=' + urll,
+        url: '/movies/search?searchTerm=' + urll,
       };
       $.ajax(pageLaod).then(function (responseMessage) {
+        let exId = 0;
+        responseMessage.movies.map((e) => {
+          if(e.title == urll){
+            exId += e.id;
+          }
+        });
         $('#addHeader2').show();
         let html =
-          `<form method="GET" id="movieForm">` +
+          `<form method="POST" id="movieForm">` +
           `<h1>${urll}</h1>` +
           `<hr>` +
           `<label for="Status">Status<span>*</span> : </label>` +
           `<select name="status" id="status" class ="inputtext" required>
-            <option value="0">Select status</option>
-            <option value="1">Currently Watching</option>
-            <option value="2">Completed</option>
-            <option value="3">On-Hold</option>
-            </select>` +
+          <option value="0">Select status</option>
+          <option value="inprogress">Currently Watching</option>
+          <option value="completed">Completed</option>
+          <option value="onhold">On-Hold</option>
+          <option value="dropped">Dropped</option>
+          <option value="plantowatch">Plan to Watch</option>
+          </select>` +
           `<br/>` +
           `<label for="score">Rating<span>*</span> : </label>` +
           `<select name="score" id="rating" class ="inputtext" required>
@@ -79,7 +99,7 @@ const divElem = document.getElementById('show');
             <option value="1">(1) Fine</option>
             </select>` +
           `<br/>` +
-          `<button type="submit" id="addButton1" >Add</button>` +
+          `<button type="submit" class="addButton1" id="${exId}" >Add</button>` +
           `<button type="submit" id="addButton2">Cancel</button>` +
           `</form>`;
         $('#show').append(html);
@@ -97,14 +117,36 @@ const divElem = document.getElementById('show');
   });
 
   $(document).ready(function () {
-    $(document).on('click', '#addButton1', function (event) {
+    $(document).on('click', '.addButton1', function (event) {
+      event.preventDefault();
       $('#addHeader2').hide();
       $('#show').hide();
       $('#showList').hide();
-      let status = $('#status').val();
-      let rating = $('#rating').val();
-      if (status != 0 && rating != 0) {
-        $('#movieForm').attr('action', '/addList');
+      let newExternalId = $(this).attr('id');
+      let newStatus = $('#status').val();
+      let newRating = $('#rating').val();
+      if (newStatus != 0 && newRating != 0) {
+        const requestConfig = {
+					method: 'POST',
+					url: '/movies/add-movie',
+					contentType: 'application/json',
+					data: JSON.stringify({
+            status : newStatus,
+            externalId : newExternalId,
+            rating : newRating
+					})
+        };
+        $.ajax(requestConfig).then(function(responseMessage) {
+					window.location.href = '/addList';
+				}).catch((error) =>{
+          if(error?.responseJSON?.message && typeof error?.responseJSON?.message === "string" && error?.responseJSON?.message.length !== 0) {
+              alert(error.responseJSON.message);
+          }else {
+            alert("Something went wrong");
+          }
+          window.location.href = '/addList/addMovie';
+        });
+        
       } else {
         event.preventDefault();
         alert('Please provide all required fields');
