@@ -25,26 +25,28 @@
         <tbody>
             <tr class="list-table-header">
                 <th></th>
-                <th>#</th>
                 <th>Image</th>
                 <th>Movie Title</th>
-                <th>status</th>
-                <th>Rating</th>
+                <th>Release Date</th>
+                <th>Average Rating</th>
             </tr>
         </tbody>
     </table>
 
-    <tbody class="list-item">
-        <tr class="list-table-data">
-            <td></td>
-            <td>Image</td>
-            <td>Movie Title</td>
-            <td>status</td>
-            <td>Rating</td>
-            <td><a href="#" class="edit">Edit</a></td>
-        </tr>
-    </tbody>
+    {{#each list}}
+    <table>
+        <tbody class="list-item">
+            <tr class="list-table-data">
+                <td></td>
+                <td class="data"><img id="imageData" src={{movieDetails.poster}}></td>
+                <td class="data" id="titleData">{{movieDetails.title}}</td>
+                <td class="data" id="releaseData">{{movieDetails.release_date}}</td>
+                <td class="data" id="ratingData">{{movieDetails.rating.average}}</td>
+                <td class="data" id="editData"><a href="#" class="edit">Edit</a></td>
+            </tr>
+        </tbody>
+        {{/each}}
+
+    </table>
 
 </div>
-
-{{>footer}}

@@ -82,15 +82,15 @@ const create = async (
   if (!id) throw 'Id is missing from third party api';
   if (!userId) throw 'Please provide user id for adding movie';
   if (!rating) throw 'Please provide rating for adding movie';
-  if (!genres) throw 'genres is missing from third party api';
-  if (!title) throw 'title is missing from third party api';
-  if (!overview) throw 'overview is missing from third party api';
-  if (!poster_path) throw 'poster_path is missing from third party api';
-  if (!release_date) throw 'release_date is missing from third party api';
-  if (!status) throw 'status is missing from third party api';
-  if (!tagline) throw 'tagline is missing from third party api';
-  if (!original_language) throw 'original_language is missing from third party api';
-  if (!runtime) throw 'runtime is missing from third party api';
+  // if (!genres) throw 'genres is missing from third party api';
+  // if (!title) throw 'title is missing from third party api';
+  // if (!overview) throw 'overview is missing from third party api';
+  // if (!poster_path) throw 'poster_path is missing from third party api';
+  // if (!release_date) throw 'release_date is missing from third party api';
+  // if (!status) throw 'status is missing from third party api';
+  // if (!tagline) throw 'tagline is missing from third party api';
+  // if (!original_language) throw 'original_language is missing from third party api';
+  // if (!runtime) throw 'runtime is missing from third party api';
 
   errorValidator.validateObjectId(userId, 'User id');
 
