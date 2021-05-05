@@ -111,9 +111,21 @@ text-align: left;
 } 
 
 #headData{
-  background-color: #5d1df0;
+  background-color: #0f2964;
   display: block;
   text-align: center;
+}
+
+#headData h1{
+  font-weight: bold;
+  color: #fff;
+  font-size: 125px;
+}
+
+#headData p{
+  font-weight: normal;
+  color: #fff;
+  font-size: 25px;
 }
 
 .status-menu-container {
@@ -188,7 +200,7 @@ list-style-type: none;
 
 .addButton{
 float: right;
-background-color: #4f74c8;
+background-color: #0f2964;
 border: #fff 0 solid;
 border-radius: 4px;
 color: #fff;
@@ -205,7 +217,7 @@ width: 36px;
 }
 
 #addHeader{
-  background-color: #4f74c8;
+  background-color: #0f2964;
   border-width: 0;
   color: #fff;
   font-family: Avenir,lucida grande,tahoma,verdana,arial,sans-serif;
@@ -218,14 +230,27 @@ width: 36px;
 }
 
 #addHeader2{
-  background-color: #4f74c8;
+  background-color: #0f2964;
   border-width: 0;
   color: #fff;
   font-family: Avenir,lucida grande,tahoma,verdana,arial,sans-serif;
   font-size: 14px;
   font-weight: 400;
   margin-left: 150px;
-  margin-right: 170px;;  
+  margin-right: 170px; 
+  padding: 2px 0;
+  text-align: center;
+}
+
+#addHeader3{
+  background-color: #0f2964;
+  border-width: 0;
+  color: #fff;
+  font-family: Avenir,lucida grande,tahoma,verdana,arial,sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0; 
+  margin-top: 20px;
   padding: 2px 0;
   text-align: center;
 }
@@ -285,13 +310,21 @@ tbody {
   border-color: inherit;
 } 
 
-#list-table {
+select{
+  pointer-events: all;
+}
+
+.list-table {
   width: 100%;
   margin: 0 auto;
   border-collapse: collapse;
   border: #EBEBEB 1px solid;
 }
 
-select{
-  pointer-events: all;
+tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
 }
+
+
