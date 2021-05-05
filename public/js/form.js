@@ -110,7 +110,6 @@ const divElem = document.getElementById('show');
         $('#addHeader2').show();
         $('#show').show();
       }
-      
     });
   });
 })(window.jQuery);
