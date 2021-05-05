@@ -158,10 +158,16 @@ router.patch('/update', async (req, res) => {
       return isUserAuthenticated(req.session?.user, res);
     }
 
-    const { status, externalId, userId, rating } = req.body;
+    const userId = req.session?.user?._id.toString();
+
+    if (!userId) {
+      return res.status(400).json({ status: false, message: 'Unauthorized User!' });
+    }
+
+    const { status, externalId, rating } = req.body;
 
     if (!externalId) throw 'You must provide externalId for movie';
-    if (!userId) throw 'You must provide userId for movie';
+
     if (!rating && !status) throw 'You must provide either rating/status to update';
     if (rating) {
       if (typeof rating !== 'number') {
@@ -236,6 +242,7 @@ router.patch('/update', async (req, res) => {
     });
   }
 });
+
 //add movie implictly if not present to our
 //db when user is adding movie to their list
 router.post('/add-movie', async (req, res) => {
@@ -244,10 +251,15 @@ router.post('/add-movie', async (req, res) => {
       return isUserAuthenticated(req.session?.user, res);
     }
 
-    const { status, externalId, userId, rating } = req.body;
+    const userId = req.session?.user?._id.toString();
+
+    if (!userId) {
+      return res.status(400).json({ status: false, message: 'Unauthorized User!' });
+    }
+
+    const { status, externalId, rating } = req.body;
     if (!externalId) throw 'You must provide externalId for movie';
     if (!status) throw 'You must provide status for movie';
-    if (!userId) throw 'You must provide userId for movie';
     if (!rating) throw 'You must provide rating for movie';
     if (typeof rating !== 'number') {
       return res.status(400).json({ status: false, message: 'Rating must be of number type' });

@@ -12,11 +12,16 @@ const router = express.Router();
 //Add comment for specified movie
 router.post('/add', async (req, res) => {
   try {
-    const { movieId, userId, message } = req.body;
+    const { movieId, message } = req.body;
+    const userId = req.session?.user?._id.toString();
+
+    if (!userId) {
+      return res.status(400).json({ status: false, message: 'Unauthorized User!' });
+    }
+
     if (!movieId || movieId.trim().length === 0)
       return res.status(400).json({ message: 'You must provide a movie id which is valid for comment' });
-    if (!userId || userId.trim().length === 0)
-      return res.status(400).json({ message: 'You must provide a user id which is valid for comment' });
+
     if (typeof message !== 'string') return res.status(400).json({ message: 'Message should be of type string' });
     if (!message || message.trim().length === 0)
       return res.status(400).json({ message: 'You must provide a message which is valid for comment' });
