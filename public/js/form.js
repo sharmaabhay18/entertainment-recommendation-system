@@ -102,11 +102,11 @@ const divElem = document.getElementById('show');
       $('#showList').hide();
       let status = $('#status').val();
       let rating = $('#rating').val();
-      if(status != 0 && rating != 0){
+      if (status != 0 && rating != 0) {
         $('#movieForm').attr('action', '/addList');
-      }else{
+      } else {
         event.preventDefault();
-        alert("Please provide all required fields")
+        alert('Please provide all required fields');
         $('#addHeader2').show();
         $('#show').show();
       }
