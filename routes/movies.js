@@ -63,7 +63,6 @@ router.get('/list', async (_, res) => {
     res.render('ERS/movieList', { movies: movieList });
   } catch (error) {
     res.status(500).redirect('/');
-    alert('Something went wrong');
   }
 });
 
@@ -151,6 +150,12 @@ router.get('/:id', async (req, res) => {
           if (comment.user_id === req.session?.user?._id) {
             isThisUser = true;
           }
+
+          let isUserLoggedIn = false;
+          if (req.session?.user) {
+            isUserLoggedIn = true;
+          }
+
           comment = {
             ...comment,
             _id: comment._id.toString(),
@@ -158,6 +163,7 @@ router.get('/:id', async (req, res) => {
             validUser: isThisUser,
             userLiked: isLikedByUser,
             userDisliked: isDislikedByUser,
+            isUserLoggedIn: isUserLoggedIn,
           };
           return comment;
         })
@@ -169,7 +175,6 @@ router.get('/:id', async (req, res) => {
     res.render('ERS/movieDetails', { movies: finalPayload, user: req.session?.user });
   } catch (error) {
     res.status(500).redirect('/');
-    alert('Something went wrong');
   }
 });
 

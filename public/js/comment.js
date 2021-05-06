@@ -1,6 +1,11 @@
 $(document).ready(function () {
   $('#like svg').click(function () {
     const likeId = this.id;
+    const isUserLoggedIn = document.querySelector('#like').getAttribute('data-value');
+    if (!!isUserLoggedIn) {
+      alert('You need to login to like/dislike comment');
+      return;
+    }
     const commentId = $(this).attr('value');
     $(`#${likeId}`).attr('class', 'fas fa-thumbs-up');
     const url = window.location.pathname;
@@ -39,6 +44,11 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('#alreadyliked svg').click(function () {
     const alreadyLikedId = this.id;
+    const isUserLoggedIn = document.querySelector('#like').getAttribute('data-value');
+    if (!!isUserLoggedIn) {
+      alert('You need to login to like/dislike comment');
+      return;
+    }
     const commentId = $(this).attr('value');
     $(`#${alreadyLikedId}`).attr('class', 'far fa-thumbs-up');
     const url = window.location.pathname;
@@ -76,6 +86,11 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('#alreadydisliked svg').click(function () {
     const alreadyDislikedId = this.id;
+    const isUserLoggedIn = document.querySelector('#like').getAttribute('data-value');
+    if (!!isUserLoggedIn) {
+      alert('You need to login to like/dislike comment');
+      return;
+    }
     const commentId = $(this).attr('value');
     $(`#${alreadyDislikedId}`).attr('class', 'fas fa-thumbs-down');
     const url = window.location.pathname;
@@ -113,6 +128,11 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('#dislike svg').click(function () {
     const dislikeId = this.id;
+    const isUserLoggedIn = document.querySelector('#like').getAttribute('data-value');
+    if (!!isUserLoggedIn) {
+      alert('You need to login to like/dislike comment');
+      return;
+    }
     const commentId = $(this).attr('value');
     $(`#${dislikeId}`).attr('class', 'fas fa-thumbs-down');
     const url = window.location.pathname;

@@ -143,11 +143,11 @@
         <div class="rateContainer">
             <div class="userRatingContainer">
                 {{#if userLiked}}
-                <div id="alreadyliked" class="likeContainer">
+                <div data-value={{isUserLoggedIn}} id="alreadyliked" class="likeContainer">
                     <i value={{_id}} id='{{_id}}alreadyliked' class="fas fa-thumbs-up"></i>
                 </div>
                 {{else}}
-                <div id="like" class="likeContainer">
+                <div data-value={{isUserLoggedIn}} id="like" class="likeContainer">
                     <i value={{_id}} id='{{_id}}like' class="far fa-thumbs-up"></i>
                 </div>
                 {{/if}}
@@ -155,11 +155,11 @@
             </div>
             <div class="userRatingContainer">
                 {{#if userDisliked}}
-                <div id="alreadydisliked" class="likeContainer">
+                <div data-value={{isUserLoggedIn}} id="alreadydisliked" class="likeContainer">
                     <i value={{_id}} id='{{_id}}alreadydisliked' class="fas fa-thumbs-down"></i>
                 </div>
                 {{else}}
-                <div id="dislike" class="likeContainer">
+                <div data-value={{isUserLoggedIn}} id="dislike" class="likeContainer">
                     <i value={{_id}} id='{{_id}}dislike' class="far fa-thumbs-down"></i>
                 </div>
                 {{/if}}
