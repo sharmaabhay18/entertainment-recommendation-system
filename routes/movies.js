@@ -56,6 +56,17 @@ const updateRating = async (isMoviePresent, rating, userId) => {
   await movies.update(_id, tempRating);
 };
 
+router.get('/list', async (_, res) => {
+  try {
+    const movieList = await movies.allMovies();
+    res.render('ERS/movieList', { movies: movieList });
+  } catch (error) {
+    alert('Something went wrong');
+    res.status(500).redirect('/')
+  }
+
+});
+
 //get all movies
 router.get('/', async (_, res) => {
   try {
@@ -138,11 +149,7 @@ router.get('/:id', async (req, res) => {
 
       finalPayload = { ...movie, comments: finalCommentPayload };
     }
-
-    res.status(200).json({
-      status: true,
-      movies: finalPayload,
-    });
+    res.render('ERS/movieDetails', { movies: finalPayload });
   } catch (error) {
     res.status(500).json({
       status: false,

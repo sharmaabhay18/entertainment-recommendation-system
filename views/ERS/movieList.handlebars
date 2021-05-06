@@ -1,0 +1,26 @@
+<div class="header">
+          {{>header loggIn=loggIn}}
+    </div>
+
+<div class="movieContainer">
+<div class="card-deck">
+  {{#each movies}}
+  <a href="{{_id}}" class="col-md-3" id="card"> 
+    <div class="card text-center">
+    <img class="card-img-top" src={{poster}} alt="Image of {{title}}">
+    <div class="card-block">
+          <div class="card-body">
+      <h5 class="card-title">{{ title }} </h5>
+      {{!-- <p class="id"  id="hidden"> {{_id}} </p> --}}
+      <p class="card-text">{{tagline}}</p>
+      <p class="card-text"><small class="text-muted">Released on {{release_date}}</small></p>
+    </div>
+    </div>
+  </div>
+  </a>
+  {{/each}}
+ </div>
+ </div>
+ <div class="footer">
+        {{>footer}}
+   </div>

@@ -1,0 +1,147 @@
+<div class="float-container">
+    <div  class="float-child">
+            <img src= {{movies.poster}} id = "image">
+    </div >       
+    <div class="float-child">  
+            <div >
+                {{#if movies.title}}
+            <h1 class = "title " > {{movies.title}}</h1>
+            {{else}}
+            <h1 class = "title " > No Title</h1>
+            {{/if}}
+            </div>   
+            <div>
+                <div >
+                    {{#if movies.release_date}}
+                    <h5><span class="glyphicon glyphicon-time">
+                      {{movies.release_date}}
+                        </span>
+                        </h5>
+                {{else}}
+                 <h5><span class="glyphicon glyphicon-time">
+                     N/A
+                      </span>
+             </h5>
+             {{/if}}
+                
+
+                </div>
+                
+                {{#if movies.genres}}
+               <div >
+                   {{#each movies.genres}}
+                   <h5>
+                       <span class="glyphicon glyphicon-time">
+                           <p id="inline">{{name}}</p>
+
+                       </span>
+                   </h5>
+               </div>
+                  {{/each}}
+                  {{else}}
+                   <div >
+                   {{#each movies.genres}}
+                   <h5>
+                       <span class="glyphicon glyphicon-time">
+                           <p id="inline">{{name}}</p>
+
+                       </span>
+                   </h5>
+               </div>
+               {{/each}}
+               {{/if}}
+                
+
+                {{#if movies.runtime}}
+                <div>
+                <h5><span class="glyphicon glyphicon-time">
+                      {{movies.runtime}} min
+                </span>
+                </h5>
+                </div>
+                {{else}}
+                <div>
+                <h5><span class="glyphicon glyphicon-time">
+                       N/A
+                </span>
+                </h5>
+                </div>
+                {{/if}}
+               
+            </div>  
+
+
+            <div>
+                <div>
+                    {{#if movies.rating.average}}
+                <h4>User Rating</h4>
+                <p>{{movies.rating.average}}</p>
+                {{else}}
+                  <h4>User Rating</h4>
+                <p>N/A</p>
+                {{/if}}
+
+            </div>
+           
+            <div>
+                {{#if movies.tagline }}
+                <span>{{movies.tagline}}</span>
+                {{else}}
+                <span>N/A</span>
+                {{/if}}
+            </div> 
+
+
+            <div>
+               
+                <h3>Overview</h3>
+                 {{#if movies.overview }}
+                <p> {{movies.overview}}</p>
+                {{else}}
+                <p>N/A</p>
+                {{/if}}
+
+
+            </div>
+            </div>
+
+
+            <div>
+                <div class="card" style="width: 18rem;">
+                    <ul class="list-group list-group-flush">
+                        {{#if movies.status}}
+                        <li class="list-group-item">Status: {{ movies.status}}</li>
+                        {{else}}
+                          <li class="list-group-item">Status: N/A</li>
+                          {{/if}}
+
+                        {{#if movies.original_language}}
+                        <li class="list-group-item">Original Language: {{movies.original_language}}</li>
+                        {{else}}
+                        <li class="list-group-item">Original Language:N/A</li>
+                        {{/if}}
+                        {{#if movies.budget}}
+                        <li class="list-group-item">Budget: {{movies.budget}}</li>
+                        {{else}}
+                           <li class="list-group-item">Budget: N/A</li>
+                        {{/if}}
+                        {{#if movies.revenue}}
+                        <li class="list-group-item">Revenue: {{movies.revenue}}</li>
+                        {{else}}
+                        <li class="list-group-item">Revenue: N/A</li>
+                        {{/if}}
+
+                    </ul>
+                </div>
+            </div>
+            
+              
+    </div>
+
+</div>
+ 
+
+  
+               
+
+
