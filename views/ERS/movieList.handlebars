@@ -3,10 +3,10 @@
 </div>
 
 <div class="movieContainer">
-  <div class="card-deck">
+  <div id="mainCardContianer">
     {{#each movies}}
-    <a href="{{_id}}" class="col-md-3" id="card">
-      <div class="card text-center">
+    <div class="col-md-3" id="card">
+      <a href="{{_id}}" class="card text-center" id="cardSubContainer">
         <img class="card-img-top" src={{poster}} alt="Image of {{title}}">
         <div class="card-block">
           <div class="card-body">
@@ -15,8 +15,8 @@
             <p class="card-text"><small class="text-muted">Released on {{release_date}}</small></p>
           </div>
         </div>
-      </div>
-    </a>
+      </a>
+    </div>
     {{/each}}
   </div>
 </div>

@@ -59,6 +59,7 @@ const updateRating = async (isMoviePresent, rating, userId) => {
 router.get('/list', async (_, res) => {
   try {
     const movieList = await movies.allMovies();
+
     res.render('ERS/movieList', { movies: movieList });
   } catch (error) {
     res.status(500).redirect('/');
