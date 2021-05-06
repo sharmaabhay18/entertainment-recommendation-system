@@ -1,147 +1,184 @@
-<div class="float-container">
-    <div  class="float-child">
-            <img src= {{movies.poster}} id = "image">
-    </div >       
-    <div class="float-child">  
-            <div >
-                {{#if movies.title}}
-            <h1 class = "title " > {{movies.title}}</h1>
-            {{else}}
-            <h1 class = "title " > No Title</h1>
-            {{/if}}
-            </div>   
-            <div>
-                <div >
-                    {{#if movies.release_date}}
-                    <h5><span class="glyphicon glyphicon-time">
-                      {{movies.release_date}}
-                        </span>
-                        </h5>
-                {{else}}
-                 <h5><span class="glyphicon glyphicon-time">
-                     N/A
-                      </span>
-             </h5>
-             {{/if}}
-                
-
-                </div>
-                
-                {{#if movies.genres}}
-               <div >
-                   {{#each movies.genres}}
-                   <h5>
-                       <span class="glyphicon glyphicon-time">
-                           <p id="inline">{{name}}</p>
-
-                       </span>
-                   </h5>
-               </div>
-                  {{/each}}
-                  {{else}}
-                   <div >
-                   {{#each movies.genres}}
-                   <h5>
-                       <span class="glyphicon glyphicon-time">
-                           <p id="inline">{{name}}</p>
-
-                       </span>
-                   </h5>
-               </div>
-               {{/each}}
-               {{/if}}
-                
-
-                {{#if movies.runtime}}
-                <div>
-                <h5><span class="glyphicon glyphicon-time">
-                      {{movies.runtime}} min
-                </span>
-                </h5>
-                </div>
-                {{else}}
-                <div>
-                <h5><span class="glyphicon glyphicon-time">
-                       N/A
-                </span>
-                </h5>
-                </div>
-                {{/if}}
-               
-            </div>  
-
-
-            <div>
-                <div>
-                    {{#if movies.rating.average}}
-                <h4>User Rating</h4>
-                <p>{{movies.rating.average}}</p>
-                {{else}}
-                  <h4>User Rating</h4>
-                <p>N/A</p>
-                {{/if}}
-
-            </div>
-           
-            <div>
-                {{#if movies.tagline }}
-                <span>{{movies.tagline}}</span>
-                {{else}}
-                <span>N/A</span>
-                {{/if}}
-            </div> 
-
-
-            <div>
-               
-                <h3>Overview</h3>
-                 {{#if movies.overview }}
-                <p> {{movies.overview}}</p>
-                {{else}}
-                <p>N/A</p>
-                {{/if}}
-
-
-            </div>
-            </div>
-
-
-            <div>
-                <div class="card" style="width: 18rem;">
-                    <ul class="list-group list-group-flush">
-                        {{#if movies.status}}
-                        <li class="list-group-item">Status: {{ movies.status}}</li>
-                        {{else}}
-                          <li class="list-group-item">Status: N/A</li>
-                          {{/if}}
-
-                        {{#if movies.original_language}}
-                        <li class="list-group-item">Original Language: {{movies.original_language}}</li>
-                        {{else}}
-                        <li class="list-group-item">Original Language:N/A</li>
-                        {{/if}}
-                        {{#if movies.budget}}
-                        <li class="list-group-item">Budget: {{movies.budget}}</li>
-                        {{else}}
-                           <li class="list-group-item">Budget: N/A</li>
-                        {{/if}}
-                        {{#if movies.revenue}}
-                        <li class="list-group-item">Revenue: {{movies.revenue}}</li>
-                        {{else}}
-                        <li class="list-group-item">Revenue: N/A</li>
-                        {{/if}}
-
-                    </ul>
-                </div>
-            </div>
-            
-              
-    </div>
-
+<div class="header">
+    {{>header loggIn=loggIn}}
 </div>
- 
 
-  
-               
+<div class="float-container">
+    <div class="float-child">
+        <img src={{movies.poster}} id="image">
+    </div>
+    <div class="float-child">
+        <div>
+            {{#if movies.title}}
+            <h1 class="title "> {{movies.title}}</h1>
+            {{else}}
+            <h1 class="title "> No Title</h1>
+            {{/if}}
+        </div>
+        <div class="directionRow">
+            <h5>Release Date: </h5>
+            {{#if movies.release_date}}
+            <h4>
+                {{movies.release_date}}
+            </h4>
+            {{else}}
+            <h4>
+                N/A
+            </h4>
+            {{/if}}
+        </div>
+        {{#if movies.genres}}
+        <div class="directionRow">
+            <h5>Genres: </h5>
+            {{#each movies.genres}}
+            <h4>
+                <p id="inline">{{name}}</p>
+            </h4>
+            {{/each}}
+        </div>
+        {{else}}
+        <div>
+            <h4>
+                N/A
+            </h4>
+        </div>
+        {{/if}}
+
+        {{#if movies.runtime}}
+        <div class="directionRow">
+            <h5>Runtime: </h5>
+            <h4>
+                {{movies.runtime}} min
+            </h4>
+        </div>
+        {{else}}
+        <h4>
+            N/A
+        </h4>
+        {{/if}}
+        {{#if movies.rating.average}}
+        <div class="directionRow">
+            <h5>User Rating:</h5>
+            <h4>
+                {{movies.rating.average}}
+            </h4>
+        </div>
+        {{else}}
+        <div class="directionRow">
+            <h5>User Rating</h5>
+            <h4>N/A</h4>
+        </div>
+        {{/if}}
+
+        {{#if movies.tagline }}
+        <div class="directionRow">
+            <h5>Tagline:</h5>
+            <h4>{{movies.tagline}}</h4>
+        </div>
+        {{else}}
+        <div class="directionRow">
+            <h5>Tagline:</h5>
+            <h4>N/A</h4>
+        </div>
+        {{/if}}
+
+        <div class="overviewContainer">
+            <h5>Overview : </h5>
+            {{#if movies.overview }}
+            <h4> {{movies.overview}}</h4>
+            {{else}}
+            <h5>Overview : </h5>
+            <h4>N/A</h4>
+            {{/if}}
+        </div>
+        <div class="tableContainer">
+            <div class="card" style="width: 18rem;">
+                <ul class="list-group list-group-flush">
+                    {{#if movies.status}}
+                    <li class="list-group-item">Status: {{ movies.status}}</li>
+                    {{else}}
+                    <li class="list-group-item">Status: N/A</li>
+                    {{/if}}
+
+                    {{#if movies.original_language}}
+                    <li class="list-group-item">Original Language: {{movies.original_language}}</li>
+                    {{else}}
+                    <li class="list-group-item">Original Language:N/A</li>
+                    {{/if}}
+                    {{#if movies.budget}}
+                    <li class="list-group-item">Budget: {{movies.budget}}</li>
+                    {{else}}
+                    <li class="list-group-item">Budget: N/A</li>
+                    {{/if}}
+                    {{#if movies.revenue}}
+                    <li class="list-group-item">Revenue: {{movies.revenue}}</li>
+                    {{else}}
+                    <li class="list-group-item">Revenue: N/A</li>
+                    {{/if}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="commentContainer">
+
+    {{#if user}}
+    <div>
+        <form id="addComment">
+            <textarea name="commentContent" id="commentBody"></textarea>
+            <button form="addComment" type="submit" name="commentAdd" id="submitComment">
+                Submit
+            </button>
+        </form>
+    </div>
+    {{/if}}
 
 
+    {{#if movies.comments}}
+    {{#each movies.comments}}
+    <div class="commentStyle">
+        <h6 class="commentName">{{user.firstname}}</h6>
+        <p class="commentMessageStyle">{{message}}</p>
+    </div>
+    <div class="directionRowComment">
+        <div class="rateContainer">
+            <div class="userRatingContainer">
+                {{#if userLiked}}
+                <div id="alreadyliked" class="likeContainer">
+                    <i value={{_id}} id='{{_id}}alreadyliked' class="fas fa-thumbs-up"></i>
+                </div>
+                {{else}}
+                <div id="like" class="likeContainer">
+                    <i value={{_id}} id='{{_id}}like' class="far fa-thumbs-up"></i>
+                </div>
+                {{/if}}
+                <h6>{{rating.like}}</h6>
+            </div>
+            <div class="userRatingContainer">
+                {{#if userDisliked}}
+                <div id="alreadydisliked" class="likeContainer">
+                    <i value={{_id}} id='{{_id}}alreadydisliked' class="fas fa-thumbs-down"></i>
+                </div>
+                {{else}}
+                <div id="dislike" class="likeContainer">
+                    <i value={{_id}} id='{{_id}}dislike' class="far fa-thumbs-down"></i>
+                </div>
+                {{/if}}
+                <h6>{{rating.dislike}}</h6>
+            </div>
+        </div>
+        {{#if validUser}}
+        <div class="commentUpdate">
+            <button type="submit" value="{{_id}}" name="deleteComment" id="deleteComment">
+                Delete
+            </button>
+        </div>
+        {{/if}}
+    </div>
+    {{/each}}
+    {{else}}
+    {{/if}}
+</div>
+</div>
+<div class="footer">
+    {{>footer}}
+</div>

@@ -61,24 +61,8 @@ router.get('/list', async (_, res) => {
     const movieList = await movies.allMovies();
     res.render('ERS/movieList', { movies: movieList });
   } catch (error) {
-    alert('Something went wrong');
     res.status(500).redirect('/');
-  }
-});
-
-//get all movies
-router.get('/', async (_, res) => {
-  try {
-    const movieList = await movies.allMovies();
-    res.status(200).json({
-      status: true,
-      movies: movieList,
-    });
-  } catch (error) {
-    res.status(500).json({
-      status: false,
-      message: error,
-    });
+    alert('Something went wrong');
   }
 });
 
@@ -125,8 +109,15 @@ router.get('/:id', async (req, res) => {
     if (movie) {
       const allComments = await comments.getCommentsByMovie(id);
 
+      let commentsWithUser = await Promise.all(
+        allComments.map(async (c) => {
+          const userPayload = await users.getUserById(c?.user_id);
+          return { ...c, user: userPayload };
+        })
+      );
+
       let finalCommentPayload = await Promise.all(
-        allComments.map(async (comment) => {
+        commentsWithUser.map(async (comment) => {
           let ratingPayload = {
             like: 0,
             dislike: 0,
@@ -141,19 +132,43 @@ router.get('/:id', async (req, res) => {
             }
           });
 
-          comment = { ...comment, rating: ratingPayload };
+          let isLikedByUser = false;
+          commentsByRating.map((like) => {
+            if (like.status === 'like' && like.user_id === req.session?.user?._id) {
+              isLikedByUser = true;
+            }
+          });
+
+          let isDislikedByUser = false;
+          commentsByRating.map((dislike) => {
+            if (dislike.status === 'dislike' && dislike.user_id === req.session?.user?._id) {
+              isDislikedByUser = true;
+            }
+          });
+
+          let isThisUser = false;
+          if (comment.user_id === req.session?.user?._id) {
+            isThisUser = true;
+          }
+          comment = {
+            ...comment,
+            _id: comment._id.toString(),
+            rating: ratingPayload,
+            validUser: isThisUser,
+            userLiked: isLikedByUser,
+            userDisliked: isDislikedByUser,
+          };
           return comment;
         })
       );
 
       finalPayload = { ...movie, comments: finalCommentPayload };
     }
-    res.render('ERS/movieDetails', { movies: finalPayload });
+
+    res.render('ERS/movieDetails', { movies: finalPayload, user: req.session?.user });
   } catch (error) {
-    res.status(500).json({
-      status: false,
-      message: error,
-    });
+    res.status(500).redirect('/');
+    alert('Something went wrong');
   }
 });
 
