@@ -155,16 +155,18 @@
   align-items: center;
 }
 
-#deleteComment {
+.deleteCommentButton {
   border: none;
   height: 35px;
   width: 100px;
   border-radius: 10px;
   margin: 10px 0px;
   background: red;
+  color: white;
+  pointer-events: all;
 }
 
-#deleteComment:hover {
+.deleteCommentButton:hover {
   opacity: 0.8;
 }
 

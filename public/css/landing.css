@@ -48,13 +48,14 @@
 .landing-container {
   width: 450px;
   background-color: #fff;
-  position: relative;
-  left: 62%;
-  top: 3%;
+  position: absolute;
+  right: 5%;
+  top: 5%;
   transition: all 0.5s linear;
   border-radius: 6px;
   border-top-left-radius: 24px;
   border-bottom-right-radius: 24px;
+  z-index: 9999;
 }
 .landing-container-show {
   display: block;

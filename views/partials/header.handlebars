@@ -1,8 +1,8 @@
-  <link rel="stylesheet" href="/css/header.css">
+<link rel="stylesheet" href="/css/header.css">
 <header>
     <nav class="header-nav">
         <div class="title">
-            Entertainment Recommendation System
+            <a href="/">Entertainment Recommendation System</a>
         </div>
         <div>
             {{#if loggIn}}
@@ -11,9 +11,9 @@
             </button>
             {{else}}
             <form action="/users/logout" method="get" id="logout-form">
-            <button class="button" id="logout-button" for="logout-form">
-                Logout
-            </button>
+                <button class="button" id="logout-button" for="logout-form">
+                    Logout
+                </button>
             </form>
             {{/if}}
         </div>

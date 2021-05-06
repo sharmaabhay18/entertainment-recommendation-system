@@ -167,8 +167,8 @@
             </div>
         </div>
         {{#if validUser}}
-        <div class="commentUpdate">
-            <button type="submit" value="{{_id}}" name="deleteComment" id="deleteComment">
+        <div class="commentUpdate" id="deleteComment">
+            <button type="submit" value="{{_id}}" id='{{_id}}' name="deleteComment" class="deleteCommentButton">
                 Delete
             </button>
         </div>

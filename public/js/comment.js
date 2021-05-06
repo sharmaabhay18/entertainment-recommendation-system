@@ -2,14 +2,12 @@ $(document).ready(function () {
   $('#like svg').click(function () {
     const likeId = this.id;
     const isUserLoggedIn = document.querySelector('#like').getAttribute('data-value');
-    if (!!isUserLoggedIn) {
+    if (isUserLoggedIn === 'false') {
       alert('You need to login to like/dislike comment');
       return;
     }
     const commentId = $(this).attr('value');
     $(`#${likeId}`).attr('class', 'fas fa-thumbs-up');
-    const url = window.location.pathname;
-    const movieId = url.substring(url.lastIndexOf('/') + 1);
 
     const requestConfig = {
       method: 'POST',
@@ -24,7 +22,7 @@ $(document).ready(function () {
     $.ajax(requestConfig)
       .then(function (res) {
         if (res?.status) {
-          window.location.href = '/movies/' + movieId;
+          location.reload();
         } else {
           $(`#${likeId}`).attr('class', 'far fa-thumbs-up');
           alert('Something went wrong');
@@ -44,15 +42,13 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('#alreadyliked svg').click(function () {
     const alreadyLikedId = this.id;
-    const isUserLoggedIn = document.querySelector('#like').getAttribute('data-value');
-    if (!!isUserLoggedIn) {
+    const isUserLoggedIn = document.querySelector('#alreadyliked').getAttribute('data-value');
+    if (isUserLoggedIn === 'false') {
       alert('You need to login to like/dislike comment');
       return;
     }
     const commentId = $(this).attr('value');
     $(`#${alreadyLikedId}`).attr('class', 'far fa-thumbs-up');
-    const url = window.location.pathname;
-    const movieId = url.substring(url.lastIndexOf('/') + 1);
 
     const requestConfig = {
       method: 'DELETE',
@@ -66,7 +62,7 @@ $(document).ready(function () {
     $.ajax(requestConfig)
       .then(function (res) {
         if (res?.status) {
-          window.location.href = '/movies/' + movieId;
+          location.reload();
         } else {
           $(`#${alreadyLikedId}`).attr('class', 'fas fa-thumbs-up');
           alert('Something went wrong');
@@ -86,15 +82,13 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('#alreadydisliked svg').click(function () {
     const alreadyDislikedId = this.id;
-    const isUserLoggedIn = document.querySelector('#like').getAttribute('data-value');
-    if (!!isUserLoggedIn) {
+    const isUserLoggedIn = document.querySelector('#alreadydisliked').getAttribute('data-value');
+    if (isUserLoggedIn === 'false') {
       alert('You need to login to like/dislike comment');
       return;
     }
     const commentId = $(this).attr('value');
     $(`#${alreadyDislikedId}`).attr('class', 'fas fa-thumbs-down');
-    const url = window.location.pathname;
-    const movieId = url.substring(url.lastIndexOf('/') + 1);
 
     const requestConfig = {
       method: 'DELETE',
@@ -108,7 +102,7 @@ $(document).ready(function () {
     $.ajax(requestConfig)
       .then(function (res) {
         if (res?.status) {
-          window.location.href = '/movies/' + movieId;
+          location.reload();
         } else {
           $(`#${alreadyDislikedId}`).attr('class', 'far fa-thumbs-down');
           alert('Something went wrong');
@@ -128,15 +122,13 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('#dislike svg').click(function () {
     const dislikeId = this.id;
-    const isUserLoggedIn = document.querySelector('#like').getAttribute('data-value');
-    if (!!isUserLoggedIn) {
+    const isUserLoggedIn = document.querySelector('#dislike').getAttribute('data-value');
+    if (isUserLoggedIn === 'false') {
       alert('You need to login to like/dislike comment');
       return;
     }
     const commentId = $(this).attr('value');
     $(`#${dislikeId}`).attr('class', 'fas fa-thumbs-down');
-    const url = window.location.pathname;
-    const movieId = url.substring(url.lastIndexOf('/') + 1);
 
     const requestConfig = {
       method: 'POST',
@@ -151,7 +143,7 @@ $(document).ready(function () {
     $.ajax(requestConfig)
       .then(function (res) {
         if (res?.status) {
-          window.location.href = '/movies/' + movieId;
+          location.reload();
         } else {
           $(`#${dislikeId}`).attr('class', 'far fa-thumbs-down');
           alert('Something went wrong');
@@ -188,7 +180,7 @@ $(document).ready(function () {
     $.ajax(requestConfig)
       .then(function (res) {
         if (res?.status) {
-          window.location.href = '/movies/' + movieId;
+          location.reload();
         } else {
           alert('Something went wrong');
         }
@@ -202,13 +194,11 @@ $(document).ready(function () {
       });
   });
 
-  $('#deleteComment').click(function (event) {
+  $('#deleteComment button').on('click', function (event) {
     event.preventDefault();
 
-    const url = window.location.pathname;
-    const movieId = url.substring(url.lastIndexOf('/') + 1);
-
     const commentId = $(this).attr('value');
+
     const requestConfig = {
       method: 'DELETE',
       url: '/comment/' + commentId,
@@ -217,7 +207,7 @@ $(document).ready(function () {
     $.ajax(requestConfig)
       .then(function (res) {
         if (res?.status) {
-          window.location.href = '/movies/' + movieId;
+          location.reload();
         } else {
           alert('Something went wrong');
         }
