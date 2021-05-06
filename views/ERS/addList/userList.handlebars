@@ -42,11 +42,13 @@
                 <td class="data" id="titleData">{{movieDetails.title}}</td>
                 <td class="data" id="releaseData">{{movieDetails.release_date}}</td>
                 <td class="data" id="ratingData">{{movieDetails.rating.average}}</td>
-                <td class="data" id="editData"><a href="#" class="edit">Edit</a></td>
+                <td class="data" id="editData"><a href="/addList/editPage?id='{{external_id}}'" class="editButton"
+                        id="{{external_id}}">Edit</a></td>
             </tr>
         </tbody>
         {{/each}}
 
     </table>
+
 
 </div>
