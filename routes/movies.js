@@ -62,9 +62,8 @@ router.get('/list', async (_, res) => {
     res.render('ERS/movieList', { movies: movieList });
   } catch (error) {
     alert('Something went wrong');
-    res.status(500).redirect('/')
+    res.status(500).redirect('/');
   }
-
 });
 
 //get all movies
