@@ -58,17 +58,26 @@ const getUrlParameter = function getUrlParameter(sParam) {
     });
   }
 
-  $(document).ready(function() {
-    $(document).on('click', '#allMovies', function (event) {
-     event.preventDefault();
-     const data = $(this).data("value").serializeArray();
-     const k = JSON.parse(JSON.stringify(data))
- 
-    console.log(k);
-    $.map(data, function(i) {
-        console.log(i)
-      });
-    });   
-   });
-
+  $(document).ready(function () {
+    $(document).on('click', '#plantowatch', function (event) {
+      event.preventDefault();
+      window.location.href = '/addList?status=plantowatch';
+    });
+    $(document).on('click', '#dropped', function (event) {
+      event.preventDefault();
+      window.location.href = '/addList?status=dropped';
+    });
+    $(document).on('click', '#onhold', function (event) {
+      event.preventDefault();
+      window.location.href = '/addList?status=onhold';
+    });
+    $(document).on('click', '#completed', function (event) {
+      event.preventDefault();
+      window.location.href = '/addList?status=completed';
+    });
+    $(document).on('click', '#inprogress', function (event) {
+      event.preventDefault();
+      window.location.href = '/addList?status=inprogress';
+    });
+  });
 })(window.jQuery);
