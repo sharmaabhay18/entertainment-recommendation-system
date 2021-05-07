@@ -56,11 +56,45 @@ const updateRating = async (isMoviePresent, rating, userId) => {
   await movies.update(_id, tempRating);
 };
 
-router.get('/list', async (_, res) => {
+router.get('/list', async (req, res) => {
   try {
-    const movieList = await movies.allMovies();
+    const { genres } = req.query;
+    const { order } = req.query;
 
-    res.render('ERS/movieList', { movies: movieList });
+    const movieList = await movies.allMovies();
+    let finalList = [];
+    if (genres) {
+      movieList.map((movie) =>
+        movie.genres.map((g) => {
+          if (g.name.replace(/\s/g, '').toLowerCase() === genres.toLowerCase()) {
+            finalList.push(movie);
+          }
+        })
+      );
+    } else {
+      finalList = movieList;
+    }
+
+    if (order) {
+      function compare(a, b) {
+        if (a.title < b.title) {
+          return -1;
+        }
+        if (a.title > b.title) {
+          return 1;
+        }
+        return 0;
+      }
+
+      if (order === 'ascending') {
+        movieList.sort(compare);
+      } else if (order === 'descending') {
+        movieList.sort(compare);
+        movieList.reverse();
+      }
+    }
+
+    res.render('ERS/movieList', { movies: finalList });
   } catch (error) {
     res.status(500).redirect('/');
   }

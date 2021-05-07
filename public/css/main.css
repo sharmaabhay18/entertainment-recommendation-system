@@ -18,3 +18,16 @@ body {
   display: flex;
   flex-direction: column;
 }
+#inline {
+  display: inline;
+}
+
+.nomovies {
+  text-align: center;
+  margin: 0px auto;
+  display: block;
+}
+#filter {
+  display: flex;
+  justify-content: flex-end;
+}
