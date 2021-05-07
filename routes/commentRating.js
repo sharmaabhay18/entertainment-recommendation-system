@@ -49,12 +49,6 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    await comments.authorizedComment(commentId, userId);
-  } catch (error) {
-    return res.status(404).json({ status: false, message: error });
-  }
-
-  try {
     await comments.getCommentByObjId(ObjectId(commentId));
   } catch (error) {
     return res.status(404).json({ status: false, message: error });
@@ -137,18 +131,12 @@ router.delete('/:id', async (req, res) => {
     }
 
     try {
-      await comments.authorizedComment(commentId, userId);
-    } catch (error) {
-      return res.status(404).json({ status: false, message: error });
-    }
-
-    try {
       await users.getUserById(userId);
     } catch (error) {
       return res.status(404).json({ status: false, message: error });
     }
 
-    const removedCommentRating = await commentRating.remove(userId, status);
+    const removedCommentRating = await commentRating.remove(userId, status, commentId);
     res.status(200).json({ status: true, message: removedCommentRating });
   } catch (error) {
     return res.status(500).json({

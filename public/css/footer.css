@@ -1,8 +1,16 @@
-.footer-panel{
-    padding: 16px 16px;
-    background: rgb(185,4,4);
-    background: radial-gradient(circle, rgba(185,4,4,1) 0%, rgba(255,64,64,1) 50%, rgba(255,82,82,1) 100%);
-    text-align: center;
-    color: #111;
-    font-size: 16px;
+.footer-panel {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: white;
+  background-color: #31393c;
+  font-family: 'Courier New', Courier, monospace;
+  color: cornsilk;
+  font-weight: 400;
 }

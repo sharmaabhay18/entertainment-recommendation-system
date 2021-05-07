@@ -1,0 +1,188 @@
+.movieContainer {
+  width: 100%;
+  margin: 40px 0px;
+}
+
+#mainCardContainer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+#filter{
+  margin: 30px 10px;
+}
+#cardSubContainer {
+  cursor: pointer;
+  text-decoration: none;
+  height: fit-content;
+  margin-bottom: 40px;
+}
+
+#card:hover {
+  text-decoration: none;
+}
+
+#card h5 {
+  color: black;
+}
+
+.float-container {
+  border: 3px solid #fff;
+  padding: 20px;
+}
+.float-child {
+  width: 50%;
+  float: left;
+  padding: 20px;
+  border: 2px solid white;
+}
+#inline {
+  display: inline;
+}
+
+.directionRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.directionRow h5 {
+  margin-right: 20px;
+}
+
+.directionRow h4 {
+  font-size: 18px;
+  margin-right: 10px;
+  font-weight: 400;
+}
+
+.overviewContainer h4 {
+  font-size: 18px;
+  margin-right: 10px;
+  font-weight: 400;
+}
+
+.tableContainer {
+  margin-top: 30px;
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.commentContainer {
+  margin: 2px 40px;
+  padding-bottom: 40px;
+  margin-bottom: 80px;
+}
+
+.commentStyle {
+  border: 1px solid grey;
+  border-radius: 5px;
+  margin: 15px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.commentName {
+  padding: 10px 20px;
+  padding-bottom: 0px;
+}
+
+.commentMessageStyle {
+  padding: 0px 20px;
+}
+
+.likeContainer {
+  margin-left: 32px;
+  background: #fff;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.likeContainer i {
+  font-size: 90px;
+  transition: 0.5s;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  color: #448aff;
+  cursor: pointer;
+}
+
+.likeContainer i:hover {
+  color: #2962ff;
+}
+
+.fas {
+  color: #448aff;
+  transition: 0.4s;
+}
+
+.fas:hover {
+  color: #2962ff;
+}
+
+.rateContainer {
+  margin: 2px 0px;
+  display: flex;
+  flex-direction: row;
+}
+
+#addComment {
+  display: flex;
+  flex-direction: column;
+  margin: 5px 20px;
+}
+
+#submitComment {
+  height: 40px;
+  width: 200px;
+  border-radius: 10px;
+  margin: 10px 0px;
+  background: #ccc;
+}
+
+.directionRowComment {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deleteCommentButton {
+  border: none;
+  height: 35px;
+  width: 100px;
+  border-radius: 10px;
+  margin: 10px 0px;
+  background: red;
+  color: white;
+  pointer-events: all;
+}
+
+.deleteCommentButton:hover {
+  opacity: 0.8;
+}
+
+.commentUpdate {
+  margin-right: 20px;
+}
+
+.userRatingContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.userRatingContainer h6 {
+  margin: 0 5px;
+}

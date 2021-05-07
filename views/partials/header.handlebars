@@ -1,20 +1,25 @@
-  <link rel="stylesheet" href="/css/header.css">
+<link rel="stylesheet" href="/css/header.css">
 <header>
     <nav class="header-nav">
         <div class="title">
-            Entertainment Recommendation System
+            <a href="/">Entertainment Recommendation System</a>
         </div>
-        <div>
+        <div class="row">   
             {{#if loggIn}}
+           
             <button class="button" id="login-button">
                 Login
             </button>
             {{else}}
+
+
+            <div>
             <form action="/users/logout" method="get" id="logout-form">
-            <button class="button" id="logout-button" for="logout-form">
-                logout
-            </button>
+                <button class="button" id="logout-button" for="logout-form">
+                    Logout
+                </button>
             </form>
+            </div>
             
             {{/if}}
         </div>

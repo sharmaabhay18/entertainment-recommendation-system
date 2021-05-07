@@ -56,19 +56,47 @@ const updateRating = async (isMoviePresent, rating, userId) => {
   await movies.update(_id, tempRating);
 };
 
-//get all movies
-router.get('/', async (_, res) => {
+router.get('/list', async (req, res) => {
   try {
+    const { genres } = req.query;
+    const { order } = req.query;
+
     const movieList = await movies.allMovies();
-    res.status(200).json({
-      status: true,
-      movies: movieList,
-    });
+    let finalList = [];
+    if (genres) {
+      movieList.map((movie) =>
+        movie.genres.map((g) => {
+          if (g.name.replace(/\s/g, '').toLowerCase() === genres.toLowerCase()) {
+            finalList.push(movie);
+          }
+        })
+      );
+    } else {
+      finalList = movieList;
+    }
+
+    if (order) {
+      function compare(a, b) {
+        if (a.title < b.title) {
+          return -1;
+        }
+        if (a.title > b.title) {
+          return 1;
+        }
+        return 0;
+      }
+
+      if (order === 'ascending') {
+        movieList.sort(compare);
+      } else if (order === 'descending') {
+        movieList.sort(compare);
+        movieList.reverse();
+      }
+    }
+
+    res.render('ERS/movieList', { movies: finalList });
   } catch (error) {
-    res.status(500).json({
-      status: false,
-      message: error,
-    });
+    res.status(500).redirect('/');
   }
 });
 
@@ -115,8 +143,15 @@ router.get('/:id', async (req, res) => {
     if (movie) {
       const allComments = await comments.getCommentsByMovie(id);
 
+      let commentsWithUser = await Promise.all(
+        allComments.map(async (c) => {
+          const userPayload = await users.getUserById(c?.user_id);
+          return { ...c, user: userPayload };
+        })
+      );
+
       let finalCommentPayload = await Promise.all(
-        allComments.map(async (comment) => {
+        commentsWithUser.map(async (comment) => {
           let ratingPayload = {
             like: 0,
             dislike: 0,
@@ -131,7 +166,39 @@ router.get('/:id', async (req, res) => {
             }
           });
 
-          comment = { ...comment, rating: ratingPayload };
+          let isLikedByUser = false;
+          commentsByRating.map((like) => {
+            if (like.status === 'like' && like.user_id === req.session?.user?._id) {
+              isLikedByUser = true;
+            }
+          });
+
+          let isDislikedByUser = false;
+          commentsByRating.map((dislike) => {
+            if (dislike.status === 'dislike' && dislike.user_id === req.session?.user?._id) {
+              isDislikedByUser = true;
+            }
+          });
+
+          let isThisUser = false;
+          if (comment.user_id === req.session?.user?._id) {
+            isThisUser = true;
+          }
+
+          let isUserLoggedIn = false;
+          if (req.session?.user) {
+            isUserLoggedIn = true;
+          }
+
+          comment = {
+            ...comment,
+            _id: comment._id.toString(),
+            rating: ratingPayload,
+            validUser: isThisUser,
+            userLiked: isLikedByUser,
+            userDisliked: isDislikedByUser,
+            isUserLoggedIn: isUserLoggedIn,
+          };
           return comment;
         })
       );
@@ -139,15 +206,9 @@ router.get('/:id', async (req, res) => {
       finalPayload = { ...movie, comments: finalCommentPayload };
     }
 
-    res.status(200).json({
-      status: true,
-      movies: finalPayload,
-    });
+    res.render('ERS/movieDetails', { movies: finalPayload, user: req.session?.user });
   } catch (error) {
-    res.status(500).json({
-      status: false,
-      message: error,
-    });
+    res.status(500).redirect('/');
   }
 });
 

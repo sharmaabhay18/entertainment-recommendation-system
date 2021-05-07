@@ -97,10 +97,11 @@ const create = async ({ status, userId, commentId }) => {
   }
 };
 
-const remove = async (userId, status) => {
+const remove = async (userId, status, commentId) => {
   try {
     if (!userId) throw 'User id is missing';
     if (!status) throw 'Status is required field';
+    if (!commentId) throw 'Comment id is required field';
 
     const isStatusPresent = isStatusValid(status);
 
@@ -109,10 +110,11 @@ const remove = async (userId, status) => {
     }
 
     errorValidator.validateObjectId(userId, 'User id');
+    errorValidator.validateObjectId(commentId, 'Comment id');
 
     const commentRatingCollection = await commentRating();
     const foundCommentRating = await commentRatingCollection.findOne({
-      $and: [{ user_id: userId }, { status: status }],
+      $and: [{ user_id: userId }, { status: status }, { comment_id: commentId }],
     });
 
     if (!foundCommentRating) throw `Could not found comment rating with user id of ${userId} and status ${status}`;

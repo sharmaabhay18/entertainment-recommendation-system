@@ -1,0 +1,62 @@
+<div class="header">
+  {{>header loggIn=loggIn}}
+</div>
+
+<div>
+<div class="dropdown" id="filter">
+  <button class="btn btn-secondary dropdown-toggle button " type="button" id="droplist" data-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false">
+    Sort By
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="/movies/list?order=ascending">ascending order</a>
+    <a class="dropdown-item" href="/movies/list?order=descending">descending order</a>
+    <a class="dropdown-item dropright">
+      <a class=" dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        Genres
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" id="Comedy" href="/movies/list?genres=comedy">Comedy</a>
+          <a class="dropdown-item" href="/movies/list?genres=action">Action</a>
+          <a class="dropdown-item" href="/movies/list?genres=horror">Horror</a>
+          <a class="dropdown-item" href="/movies/list?genres=romance">Romance</a>
+          <a class="dropdown-item" href="/movies/list?genres=drama">Drama</a>
+          <a class="dropdown-item" href="/movies/list?genres=fantasy">Fantasy</a>
+          <a class="dropdown-item" href="/movies/list?genres=thriller">Thriller</a>
+          <a class="dropdown-item" href="/movies/list?genres=crime">Crime</a>
+          <a class="dropdown-item" href="/movies/list?genres=mystery">Mystery</a>
+        </div>
+      </a>
+    </a>
+  </div>
+</div>
+
+
+  {{#if movies}}
+  <div class="movieContainer">
+  <div id="mainCardContainer">
+    {{#each movies}}
+    <div class="col-md-3" id="card">
+      <a href="{{_id}}" class="card text-center" id="cardSubContainer">
+        <img class="card-img-top" src={{poster}} alt="Image of {{title}}">
+        <div class="card-block">
+          <div class="card-body">
+            <h5 class="card-title">{{ title }} </h5>
+            <p class="card-text text-muted">{{tagline}}</p>
+            <p class="card-text"><small class="text-muted">Released on {{release_date}}</small></p>
+          </div>
+        </div>
+      </a>
+    </div>
+    {{/each}}
+  </div>
+  </div>
+  {{else}}
+  <h1 class="nomovies"> No Movies under this Genres!<h1>
+      {{/if}}
+</div>
+
+
+<div class="footer">
+  {{>footer}}
+</div>
