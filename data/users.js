@@ -29,6 +29,15 @@ async function getAllUserName() {
   return returnData;
 }
 
+async function getAllEmailId() {
+  const userCollection = await users();
+  const userName = await userCollection.find({}).toArray();
+  let returnData = userName.map((ele) => {
+    return ele.email;
+  });
+  return returnData;
+}
+
 const getUserByUsername = async (username) => {
   try {
     if (!username || typeof username !== 'string') throw 'You must provide a valid username';
@@ -115,6 +124,7 @@ const updateMovieList = async (userId, { externalId, status }) => {
 module.exports = {
   getUserById,
   getAllUserName,
+  getAllEmailId,
   getUserByUsername,
   createuser,
   updateMovieList,

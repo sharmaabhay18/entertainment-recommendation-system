@@ -94,7 +94,7 @@ router.get('/list', async (req, res) => {
       }
     }
 
-    res.render('ERS/movieList', { movies: finalList });
+    res.render('ERS/movieList', { movies: finalList, loggIn: true});
   } catch (error) {
     res.status(500).redirect('/');
   }
@@ -206,7 +206,7 @@ router.get('/:id', async (req, res) => {
       finalPayload = { ...movie, comments: finalCommentPayload };
     }
 
-    res.render('ERS/movieDetails', { movies: finalPayload, user: req.session?.user });
+    res.render('ERS/movieDetails', {loggIn: req.session?.user ?false:true,movies: finalPayload, user: req.session?.user });
   } catch (error) {
     res.status(500).redirect('/');
   }

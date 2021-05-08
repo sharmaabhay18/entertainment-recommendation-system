@@ -13,9 +13,10 @@ const routeConstructor = (app) => {
     if (req.session.user) {
       // res.status(200).send(req.session.user)
       // load the default landing page as user is already logged in
-      res.render('ERS/landing', {
+      res.render('ERS/home', {
         title: 'Nav',
         loggIn: false,
+        userDetails: req.session.user
       });
     } else {
       res.render('ERS/landing', {

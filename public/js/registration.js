@@ -1,6 +1,8 @@
 var userList = [];
-var isUsernameMatchInit = false;
+var emailList = [];
 var isUsernameMatch = false;
+var isEmailMatch = false;
+
 $(document).ready(function () {
   $('#login-button').click(function () {
     var $modalEle = $('.landing-container');
@@ -39,7 +41,14 @@ $(document).ready(function () {
       userList = Object.assign(userList, result);
     },
   });
+  $.ajax({
+    url: '/users/emailId',
+    success: function (result) {
+      emailList = Object.assign(emailList, result);
+    },
+  });
 });
+
 
 var loginFields = '#login-username, #login-password';
 
@@ -84,6 +93,9 @@ function allFilled(fields) {
     if (isUsernameMatch) {
       filled = false;
     }
+    if (isEmailMatch){
+      filled = false;
+    }
   });
   return filled;
 }
@@ -101,8 +113,7 @@ function toggleForm() {
   }
 }
 
-document.forms['loginForm'].addEventListener('submit', (event) => {
-  event.preventDefault();
+$('#loginForm').on('submit', function(){
   $('#login-submit').attr('disabled', 'disabled');
   // TODO do something here to show user that form is being submitted
   fetch(event.target.action, {
@@ -118,11 +129,12 @@ document.forms['loginForm'].addEventListener('submit', (event) => {
       $('#login-submit').removeAttr('disabled');
       alert('User not found');
     }
+  },(error) =>{
+    console.log(error)
   });
-});
+})
 
-document.forms['registerForm'].addEventListener('submit', (event) => {
-  event.preventDefault();
+$('#registerForm').on('submit', function(){
   $('#signup-submit').attr('disabled', 'disabled');
   // TODO do something here to show user that form is being submitted
   fetch(event.target.action, {
@@ -139,7 +151,8 @@ document.forms['registerForm'].addEventListener('submit', (event) => {
       alert('Something went wrong');
     }
   });
-});
+})
+
 
 $('#username').keyup(function () {
   let inputValue = $('#username').val();
@@ -149,6 +162,18 @@ $('#username').keyup(function () {
     alert('User name already exist');
   } else {
     isUsernameMatch = false;
+    checkIfFilled();
+  }
+});
+
+$('#email').keyup(function () {
+  let inputValue = $('#email').val();
+  if (emailList.find((ele) => ele == inputValue)) {
+    $('#signup-submit').attr('disabled', 'disabled');
+    isEmailMatch = true;
+    alert('Email Id already exist');
+  } else {
+    isEmailMatch = false;
     checkIfFilled();
   }
 });
