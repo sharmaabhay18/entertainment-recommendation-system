@@ -39,3 +39,9 @@
 .button:focus {
   outline: none;
 }
+
+.user-profile-icon{
+  font-size: 26px;
+  padding: 0px 36px;
+  color: #fafafa;
+}

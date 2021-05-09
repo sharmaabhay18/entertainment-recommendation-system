@@ -1,0 +1,22 @@
+.user-profile {
+    background: #fafafa;
+    flex: 1;
+    display: flex;
+    font-size:36px;
+    background: rgb(240,217,217);
+background: linear-gradient(171deg, rgba(240,217,217,1) 0%, rgba(245,141,141,1) 52%, rgba(247,45,45,1) 100%);
+}
+
+.container-div {
+   height: 100%;
+    padding: 36px 48px;
+}
+.fs-20 {
+    font-size:20px;
+    color:#231c21;
+}
+
+.user-icon{
+    font-size: 200px;
+    padding-left: 173px;
+}

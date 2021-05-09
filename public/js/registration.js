@@ -49,7 +49,6 @@ $(document).ready(function () {
   });
 });
 
-
 var loginFields = '#login-username, #login-password';
 
 $(loginFields).on('change', function () {
@@ -93,7 +92,7 @@ function allFilled(fields) {
     if (isUsernameMatch) {
       filled = false;
     }
-    if (isEmailMatch){
+    if (isEmailMatch) {
       filled = false;
     }
   });
@@ -113,28 +112,49 @@ function toggleForm() {
   }
 }
 
-$('#loginForm').on('submit', function(){
+$('#loginForm').on('submit', function () {
   $('#login-submit').attr('disabled', 'disabled');
   // TODO do something here to show user that form is being submitted
-  fetch(event.target.action, {
-    method: 'POST',
-    body: new URLSearchParams(new FormData(event.target)), // event.target is the form
-  }).then((resp) => {
-    console.log(resp); // or resp.text() or whatever the server sends
-    if (resp.status === 400) {
-      $('#login-submit').removeAttr('disabled');
-      alert('Wrong password');
+  // fetch(event.target.action, {
+  //   method: 'POST',
+  //   body: new URLSearchParams(new FormData(event.target)), // event.target is the form
+  // }).then(
+  //   (resp) => {
+  //     console.log(resp); // or resp.text() or whatever the server sends
+  //     if (resp.status === 400) {
+  //       $('#login-submit').removeAttr('disabled');
+  //       alert('Wrong password');
+  //     }
+  //     if (resp.status === 404) {
+  //       $('#login-submit').removeAttr('disabled');
+  //       alert('User not found');
+  //     }
+  //   },
+  //   (error) => {
+  //     console.log(error);
+  //   }
+  // );
+  let data = {
+    username: $('#login-username').val(),
+    password: $('#login-password').val()
+  }
+  $.ajax({
+    type: 'POST',
+    url: '/users/login',
+    headers: {
+        "Content-Type": "application/json"
+    },
+    data: JSON.stringify(data),
+    dataType: "json",
+    success: function(data) {
+      alert('Login successfull')
+    },
+    error: function(error) {
     }
-    if (resp.status === 404) {
-      $('#login-submit').removeAttr('disabled');
-      alert('User not found');
-    }
-  },(error) =>{
-    console.log(error)
-  });
 })
+});
 
-$('#registerForm').on('submit', function(){
+$('#registerForm').on('submit', function () {
   $('#signup-submit').attr('disabled', 'disabled');
   // TODO do something here to show user that form is being submitted
   fetch(event.target.action, {
@@ -151,8 +171,7 @@ $('#registerForm').on('submit', function(){
       alert('Something went wrong');
     }
   });
-})
-
+});
 
 $('#username').keyup(function () {
   let inputValue = $('#username').val();

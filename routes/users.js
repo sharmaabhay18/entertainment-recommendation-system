@@ -9,15 +9,15 @@ router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
     if (!username || !password) {
-      res.status(400).json({ error: 'All fields are mandatory' });
+      res.status(400).send({ error: 'All fields are mandatory' });
       return;
     }
     if (typeof username !== 'string' || typeof password !== 'string') {
-      res.status(400).json({ error: 'invalid format for username/password' });
+      res.status(400).send({ error: 'invalid format for username/password' });
       return;
     }
     if (!username.trim().length || !password.trim().length) {
-      res.status(400).json({ error: 'username cant be empty string' });
+      res.status(400).send({ error: 'username cant be empty string' });
       return;
     }
 
@@ -39,25 +39,18 @@ router.post('/login', async (req, res) => {
 
         req.session.user = user;
 
-        res.render('ERS/home', {
-          title: 'Nav',
-          loggIn: false,
-          userDetails: req.session.user
-        });
-        //redirect user to home page
+        res.status(200).redirect('/movies/list')
+        //redirect user to movies page
       } else {
-        res.status(400).json({ status: false, message: 'Invalid password' });
+        res.status(400).send('Wrong password. <a href="/">Go to Login</a>')
         // password did not matched
       }
     } else {
-      res.status(404).json({ status: false, message: 'User not found' });
+      res.status(404).send('Username not found. <a href="/">Go to Login</a>')
       //user not found
     }
   } catch (error) {
-    res.status(500).send({
-      status: false,
-      message: error,
-    });
+    res.status(500).redirect('/')
   }
 });
 
@@ -100,7 +93,7 @@ router.post('/create', async (req, res) => {
       res.status(400).json({ error: 'Username already exists' });
       return;
     }
-    
+
     if (!emailIds.indexOf(email)) {
       res.status(400).json({ error: 'Email Id already exists' });
       return;
@@ -108,13 +101,9 @@ router.post('/create', async (req, res) => {
     password = await bcrypt.hash(password, 16);
     const newUser = await users.createuser(username, firstname, lastname, email, password);
     req.session.user = newUser;
-    res.render('ERS/home', {
-      title: 'Nav',
-      loggIn: false,
-      userDetails: req.session.user
-    });
+    res.status(200).redirect('/movies/list')
   } catch (e) {
-    res.status(500).json({ error: e });
+    res.status(500).redirect('/');
   }
 });
 
@@ -138,19 +127,32 @@ router.get('/emailId', async (req, res) => {
 
 router.get('/logout', async (req, res) => {
   req.session.destroy();
-  res.render('ERS/landing', {
-    title: 'Nav',
-    loggIn: true,
-  });
+  res.redirect('/')
 });
 
 router.get('/profile', async (req, res) => {
-  res.render('ERS/userProfile', {
-    title: 'Nav',
-    loggIn: false,
-    userDetails: req.session.user
-  });
-})
+  if(req.session.user){
+    res.render('ERS/userProfile', {
+      title: 'Nav',
+      loggIn: false,
+      userDetails: req.session.user,
+    });
+  }else{
+    res.redirect('/')
+  }
+});
+
+router.get('/home', async (req,res) => {
+  if(req.session.user){
+    res.render('ERS/home', {
+      title: 'Nav',
+      loggIn: false,
+      userDetails: req.session.user,
+    });
+  }else{
+    res.redirect('/')
+  }
+});
 
 function validateEmail(email) {
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

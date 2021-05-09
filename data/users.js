@@ -43,7 +43,7 @@ const getUserByUsername = async (username) => {
     if (!username || typeof username !== 'string') throw 'You must provide a valid username';
     const userCollection = await users();
     const user = await userCollection.findOne({ username: username });
-    if (user === null) throw 'No user with that id';
+    if (user === null) return null;
     user._id = user._id.toString();
     return user;
   } catch (error) {
