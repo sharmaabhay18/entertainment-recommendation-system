@@ -6,15 +6,16 @@
         </div>
         <div class="row">   
             {{#if loggIn}}
-           
+            {{#if isDefaultRoute}}
+            
             <button class="button" id="login-button">
                 Login
             </button>
             {{else}}
-            <div >
-            <a class="user-profile-icon" href="/users/profile"><i class="fa fa-user" aria-hidden="true"></i></a></div>
+            <a href="/" class = 'button button-a' >Go to Home</a>
 
-
+            {{/if}}
+            {{else}}
             <div>
             <form action="/users/logout" method="get" id="logout-form">
                 <button class="button" id="logout-button" for="logout-form">

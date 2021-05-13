@@ -94,7 +94,7 @@ router.get('/list', async (req, res) => {
       }
     }
 
-    res.render('ERS/movieList', { movies: finalList, loggIn: req.session.user ? false:true });
+    res.render('ERS/movieList', { movies: finalList, loggIn: req.session.user ? false : true , isDefaultRoute: false });
   } catch (error) {
     res.status(500).redirect('/');
   }
@@ -210,6 +210,7 @@ router.get('/:id', async (req, res) => {
       loggIn: req.session?.user ? false : true,
       movies: finalPayload,
       user: req.session?.user,
+      isDefaultRoute: false 
     });
   } catch (error) {
     res.status(500).redirect('/');

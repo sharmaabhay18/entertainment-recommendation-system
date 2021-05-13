@@ -140,7 +140,7 @@
 }
 
 .submit-button:disabled {
-  background-color: #f59ba4;
+  background-color: #757272;
   cursor: not-allowed;
 }
 
