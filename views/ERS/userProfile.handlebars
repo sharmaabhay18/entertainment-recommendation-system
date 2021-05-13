@@ -1,4 +1,6 @@
-<link rel="stylesheet" href="/css/profile.css">
+{{#section 'head'}}
+<title>{{userDetails.firstname}}'s Profile</title>
+{{/section}}
 <div class="header">
     {{>header loggIn=loggIn}}
 </div>
@@ -7,24 +9,24 @@
         <i class="fa fa-user" aria-hidden="true"></i>
     </div>
     <div class="container-div">
-      <div>
-        Welcome {{userDetails.firstname}} ...
-    </div>
-    <h4>
-        Here are some details about your profile
-    </h4>
-  <div class=" py-2 fs-20 ">
-      Username: {{userDetails.username}}
-  </div >
-  <div class=" py-2 fs-20 ">
-      First Name: {{userDetails.firstname}}
-  </div>
-   <div class=" py-2 fs-20 ">
-      Last Name: {{userDetails.lastname}}
-  </div>
-   <div class=" py-2 fs-20 ">
-      Email: {{userDetails.email}}
-  </div>
+        <div>
+            Welcome {{userDetails.firstname}} ...
+        </div>
+        <h4>
+            Here are some details about your profile
+        </h4>
+        <div class=" py-2 fs-20 ">
+            Username: {{userDetails.username}}
+        </div>
+        <div class=" py-2 fs-20 ">
+            First Name: {{userDetails.firstname}}
+        </div>
+        <div class=" py-2 fs-20 ">
+            Last Name: {{userDetails.lastname}}
+        </div>
+        <div class=" py-2 fs-20 ">
+            Email: {{userDetails.email}}
+        </div>
     </div>
 </div>
 <div class="footer">

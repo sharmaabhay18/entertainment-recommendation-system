@@ -4,25 +4,25 @@
         <div class="title">
             <a href="/">Entertainment Recommendation System</a>
         </div>
-        <div class="row">   
+        <div class="row">
             {{#if loggIn}}
-           
+
             <button class="button" id="login-button">
                 Login
             </button>
             {{else}}
-            <div >
-            <a class="user-profile-icon" href="/users/profile"><i class="fa fa-user" aria-hidden="true"></i></a></div>
-
-
             <div>
-            <form action="/users/logout" method="get" id="logout-form">
-                <button class="button" id="logout-button" for="logout-form">
-                    Logout
-                </button>
-            </form>
+                <a class="user-profile-icon" href="/users/profile" aria-label="user-icon"><i class="fa fa-user"
+                        aria-hidden="true"></i></a>
             </div>
-            
+            <div>
+                <form action="/users/logout" method="get" id="logout-form">
+                    <button class="button" id="logout-button" for="logout-form">
+                        Logout
+                    </button>
+                </form>
+            </div>
+
             {{/if}}
         </div>
     </nav>

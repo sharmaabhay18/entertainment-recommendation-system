@@ -122,7 +122,9 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('#dislike svg').click(function () {
     const dislikeId = this.id;
+
     const isUserLoggedIn = document.querySelector('#dislike').getAttribute('data-value');
+
     if (isUserLoggedIn === 'false') {
       alert('You need to login to like/dislike comment');
       return;
