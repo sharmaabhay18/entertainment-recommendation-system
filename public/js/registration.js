@@ -136,22 +136,21 @@ $('#loginForm').on('submit', function () {
   // );
   let data = {
     username: $('#login-username').val(),
-    password: $('#login-password').val()
-  }
+    password: $('#login-password').val(),
+  };
   $.ajax({
     type: 'POST',
     url: '/users/login',
     headers: {
-        "Content-Type": "application/json"
+      'Content-Type': 'application/json',
     },
     data: JSON.stringify(data),
-    dataType: "json",
-    success: function(data) {
-      alert('Login successfull')
+    dataType: 'json',
+    success: function (data) {
+      alert('Login successfull');
     },
-    error: function(error) {
-    }
-})
+    error: function (error) {},
+  });
 });
 
 $('#registerForm').on('submit', function () {

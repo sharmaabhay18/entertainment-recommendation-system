@@ -39,18 +39,18 @@ router.post('/login', async (req, res) => {
 
         req.session.user = user;
 
-        res.status(200).redirect('/movies/list')
+        res.status(200).redirect('/movies/list');
         //redirect user to movies page
       } else {
-        res.status(400).send('Wrong password. <a href="/">Go to Login</a>')
+        res.status(400).send('Wrong password. <a href="/">Go to Login</a>');
         // password did not matched
       }
     } else {
-      res.status(404).send('Username not found. <a href="/">Go to Login</a>')
+      res.status(404).send('Username not found. <a href="/">Go to Login</a>');
       //user not found
     }
   } catch (error) {
-    res.status(500).redirect('/')
+    res.status(500).redirect('/');
   }
 });
 
@@ -101,7 +101,7 @@ router.post('/create', async (req, res) => {
     password = await bcrypt.hash(password, 16);
     const newUser = await users.createuser(username, firstname, lastname, email, password);
     req.session.user = newUser;
-    res.status(200).redirect('/movies/list')
+    res.status(200).redirect('/movies/list');
   } catch (e) {
     res.status(500).redirect('/');
   }
@@ -127,30 +127,30 @@ router.get('/emailId', async (req, res) => {
 
 router.get('/logout', async (req, res) => {
   req.session.destroy();
-  res.redirect('/')
+  res.redirect('/');
 });
 
 router.get('/profile', async (req, res) => {
-  if(req.session.user){
+  if (req.session.user) {
     res.render('ERS/userProfile', {
       title: 'Nav',
       loggIn: false,
       userDetails: req.session.user,
     });
-  }else{
-    res.redirect('/')
+  } else {
+    res.redirect('/');
   }
 });
 
-router.get('/home', async (req,res) => {
-  if(req.session.user){
+router.get('/home', async (req, res) => {
+  if (req.session.user) {
     res.render('ERS/home', {
       title: 'Nav',
       loggIn: false,
       userDetails: req.session.user,
     });
-  }else{
-    res.redirect('/')
+  } else {
+    res.redirect('/');
   }
 });
 

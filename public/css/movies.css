@@ -10,17 +10,18 @@
   flex-wrap: wrap;
 }
 
-#filter{
+#filter {
   margin: 30px 10px;
 }
-#cardSubContainer {
+
+.cardSubContainer {
   cursor: pointer;
   text-decoration: none;
   height: fit-content;
   margin-bottom: 40px;
 }
 
-#card:hover {
+.cardSubContainer:hover {
   text-decoration: none;
 }
 
@@ -47,19 +48,30 @@
   flex-direction: row;
   align-items: center;
   margin-bottom: 10px;
+  margin: 20px 0px;
 }
 
-.directionRow h5 {
-  margin-right: 20px;
+.directionRow h2 {
+  margin: 0;
+  margin-right: 15px;
+  font-size: 22px;
 }
 
-.directionRow h4 {
+.directionRow p {
+  margin: 0;
   font-size: 18px;
   margin-right: 10px;
   font-weight: 400;
+  align-self: center;
 }
 
-.overviewContainer h4 {
+.overviewContainer h2 {
+  margin: 0;
+  margin-right: 15px;
+  font-size: 22px;
+}
+
+.overviewContainer p {
   font-size: 18px;
   margin-right: 10px;
   font-weight: 400;
@@ -185,4 +197,8 @@
 
 .userRatingContainer h6 {
   margin: 0 5px;
+}
+
+.genreStyle {
+  padding-left: 25px;
 }

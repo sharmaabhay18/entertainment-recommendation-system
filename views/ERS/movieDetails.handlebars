@@ -1,10 +1,13 @@
+{{#section 'head'}}
+<title>{{movies.title}}</title>
+{{/section}}
 <div class="header">
     {{>header loggIn=loggIn}}
 </div>
 
 <div class="float-container">
     <div class="float-child">
-        <img src={{movies.poster}} id="image">
+        <img src={{movies.poster}} id="image" alt={{movies.title}}>
     </div>
     <div class="float-child">
         <div>
@@ -15,79 +18,77 @@
             {{/if}}
         </div>
         <div class="directionRow">
-            <h5>Release Date: </h5>
+            <h2>Release Date:</h2>
             {{#if movies.release_date}}
-            <h4>
+            <p>
                 {{movies.release_date}}
-            </h4>
+            </p>
             {{else}}
-            <h4>
+            <p>
                 N/A
-            </h4>
+            </p>
             {{/if}}
         </div>
         {{#if movies.genres}}
         <div class="directionRow">
-            <h5>Genres: </h5>
+            <h2>Genres: </h2>
             {{#each movies.genres}}
-            <h4>
-                <p id="inline">{{name}}</p>
-            </h4>
+            <p id="inline">{{name}}</p>
             {{/each}}
         </div>
         {{else}}
         <div>
-            <h4>
+            <p>
                 N/A
-            </h4>
+            </p>
         </div>
         {{/if}}
 
         {{#if movies.runtime}}
         <div class="directionRow">
-            <h5>Runtime: </h5>
-            <h4>
+            <h2>Runtime: </h2>
+            <p>
                 {{movies.runtime}} min
-            </h4>
+            </p>
         </div>
         {{else}}
-        <h4>
+        <p>
             N/A
-        </h4>
+        </p>
         {{/if}}
         {{#if movies.rating.average}}
         <div class="directionRow">
-            <h5>User Rating:</h5>
-            <h4>
+            <h2>User Rating:</h2>
+            <p>
                 {{movies.rating.average}}
-            </h4>
+            </p>
         </div>
         {{else}}
         <div class="directionRow">
-            <h5>User Rating</h5>
-            <h4>N/A</h4>
+            <h2>User Rating</h2>
+            <p>N/A</p>
         </div>
         {{/if}}
 
         {{#if movies.tagline }}
         <div class="directionRow">
-            <h5>Tagline:</h5>
-            <h4>{{movies.tagline}}</h4>
+            <h2>Tagline:</h2>
+            <p>{{movies.tagline}}</p>
         </div>
         {{else}}
         <div class="directionRow">
-            <h5>Tagline:</h5>
-            <h4>N/A</h4>
+            <h2>Tagline:</h2>
+            <p>N/A</p>
         </div>
         {{/if}}
 
         <div class="overviewContainer">
-            <h5>Overview : </h5>
+            <h2>Overview : </h2>
             {{#if movies.overview }}
-            <h4> {{movies.overview}}</h4>
+            <p> {{movies.overview}}</p>
             {{else}}
-            <h5>Overview : </h5>
-            <h4>N/A</h4>
+            <h2>Overview : </h2>
+            <p>N/A</p>
             {{/if}}
         </div>
         <div class="tableContainer">

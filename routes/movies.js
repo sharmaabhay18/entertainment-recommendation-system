@@ -94,7 +94,7 @@ router.get('/list', async (req, res) => {
       }
     }
 
-    res.render('ERS/movieList', { movies: finalList, loggIn: req.session.user ? false:true });
+    res.render('ERS/movieList', { movies: finalList, loggIn: req.session.user ? false : true });
   } catch (error) {
     res.status(500).redirect('/');
   }
