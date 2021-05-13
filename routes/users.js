@@ -72,7 +72,7 @@ router.post('/create', async (req, res) => {
       typeof email !== 'string' ||
       typeof password !== 'string'
     ) {
-      res.status(400).json({ error: 'invalid format for title/summary' });
+      res.status(400).json({ error: 'invalid format for input' });
       return;
     }
     if (
@@ -82,7 +82,7 @@ router.post('/create', async (req, res) => {
       !email.trim().length ||
       !password.trim().length
     ) {
-      res.status(400).json({ error: 'title/summary cant be empty string' });
+      res.status(400).json({ error: 'Input cant be empty string' });
       return;
     }
     if (!validateEmail(email)) {
@@ -136,6 +136,7 @@ router.get('/profile', async (req, res) => {
       title: 'Nav',
       loggIn: false,
       userDetails: req.session.user,
+      isDefaultRoute: false,
     });
   } else {
     res.redirect('/');
@@ -148,6 +149,7 @@ router.get('/home', async (req, res) => {
       title: 'Nav',
       loggIn: false,
       userDetails: req.session.user,
+      isDefaultRoute: false,
     });
   } else {
     res.redirect('/');

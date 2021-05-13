@@ -18,6 +18,7 @@ const routeConstructor = (app) => {
       res.render('ERS/landing', {
         title: 'Nav',
         loggIn: req.session.user ? false : true,
+        isDefaultRoute: true,
       });
     }
   });

@@ -45,3 +45,7 @@
   padding: 0px 36px;
   color: #fafafa;
 }
+.button-a,.button-a:hover,.button-a:visited{
+color:#fff;
+text-decoration: none;
+}
