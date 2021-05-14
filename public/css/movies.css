@@ -39,6 +39,13 @@
   padding: 20px;
   border: 2px solid white;
 }
+
+@media only screen and (min-width: 200px) and (max-width: 1100px) {
+  .float-child {
+    width: 100%;
+  }
+}
+
 #inline {
   display: inline;
 }
@@ -160,7 +167,17 @@
   width: 200px;
   border-radius: 10px;
   margin: 10px 0px;
+  border: none;
   background: #ccc;
+}
+
+.commentHeading {
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.noComments {
+  margin-top: 10px;
 }
 
 .directionRowComment {

@@ -121,12 +121,12 @@
     </div>
 </div>
 <div class="commentContainer">
-
     {{#if user}}
     <div>
         <form id="addComment">
-            <textarea name="commentContent" id="commentBody"></textarea>
-            <button form="addComment" type="submit" name="commentAdd" id="submitComment">
+            <h4>Add comments</h4>
+            <textarea placeholder="Please enter comment here" name="commentContent" id="commentBody"></textarea>
+            <button form="addComment" type="submit" name="commentAdd" id="submitComment" >
                 Submit
             </button>
         </form>
@@ -135,6 +135,7 @@
 
 
     {{#if movies.comments}}
+    <h4 class="commentHeading">Comments</h4>
     {{#each movies.comments}}
     <div class="commentStyle">
         <h6 class="commentName">{{user.firstname}}</h6>
@@ -177,6 +178,9 @@
     </div>
     {{/each}}
     {{else}}
+    <div class='noComments'>
+    <h4>No comments available! Please <a href="/">login</a> to add comments</h4>
+    </div>
     {{/if}}
 </div>
 </div>

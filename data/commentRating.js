@@ -55,11 +55,12 @@ const getCommentRatingByObjId = async (id) => {
   return { ...foundCommentRating, _id: foundCommentRating?._id?.toString() };
 };
 
-const create = async ({ status, userId, commentId }) => {
+const create = async ({ status, userId, commentId, altStatus }) => {
   try {
     if (!userId) throw 'user id is missing';
     if (!commentId) throw 'Comment id is missing';
     if (!status) throw 'Status is required field';
+    if (!altStatus) throw 'Alt Status is required field';
 
     const isStatusPresent = isStatusValid(status);
 
@@ -91,6 +92,17 @@ const create = async ({ status, userId, commentId }) => {
     const newId = insertCommentRating.insertedId;
 
     const retrievedCommentRating = await getCommentRatingByObjId(newId);
+
+    const foundCommentRating = await commentRatingCollection.findOne({
+      $and: [{ user_id: userId }, { status: altStatus }, { comment_id: commentId }],
+    });
+
+    if (foundCommentRating) {
+      await commentRatingCollection.deleteOne({
+        _id: foundCommentRating?._id,
+      });
+    }
+
     return retrievedCommentRating;
   } catch (error) {
     throw error;

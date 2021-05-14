@@ -55,12 +55,6 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    const commentRatingPayload = {
-      userId,
-      commentId,
-      status,
-    };
-
     const isCommentPresentForUser = await commentRating.getByUserId(userId, commentId);
 
     if (isCommentPresentForUser && isCommentPresentForUser.length === 1) {
@@ -72,6 +66,19 @@ router.post('/', async (req, res) => {
     } else if (isCommentPresentForUser && isCommentPresentForUser.length >= 2) {
       return res.status(400).json({ status: false, message: 'User has already liked/disliked the comment' });
     }
+    let altStatus = '';
+    if (status === 'like') {
+      altStatus = 'dislike';
+    } else {
+      altStatus = 'like';
+    }
+
+    const commentRatingPayload = {
+      userId,
+      commentId,
+      status,
+      altStatus,
+    };
 
     const addedCommentRating = await commentRating.create(commentRatingPayload);
 
