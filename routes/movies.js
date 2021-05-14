@@ -50,7 +50,10 @@ const updateRating = async (isMoviePresent, rating, userId) => {
   if (tempRating?.user_rating.length === 1) {
     newAverage = rating;
   } else {
-    newAverage = tempRating?.user_rating.reduce((a, b) => a.value + b.value) / tempRating?.user_rating.length;
+    const sumOfValue = tempRating?.user_rating.reduce(function (acc, obj) {
+      return acc + obj.value;
+    }, 0);
+    newAverage = sumOfValue / tempRating?.user_rating.length;
   }
   tempRating.average = newAverage;
   await movies.update(_id, tempRating);
@@ -105,9 +108,9 @@ router.get('/list', async (req, res) => {
 //search movie based on value
 router.get('/search', async (req, res) => {
   try {
-    // if (!req.session?.user) {
-    //   return isUserAuthenticated(req.session?.user, res);
-    // }
+    if (!req.session?.user) {
+      return isUserAuthenticated(req.session?.user, res);
+    }
 
     const { searchTerm } = req.query;
     if (!searchTerm) throw res.status(400).json({ message: 'You must pass search term!' });

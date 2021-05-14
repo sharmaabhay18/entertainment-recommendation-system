@@ -7,19 +7,18 @@
 
 <div>
   <div class="dropdown" id="filter">
-    <button class="btn btn-secondary dropdown-toggle button " type="button" id="droplist" data-toggle="dropdown"
+    <button class="btn btn-secondary dropdown-toggle button"  id="droplist" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
       Sort By
     </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonOne">
+    <div class="dropdown-menu">
       <a class="dropdown-item" href="/movies/list?order=ascending">Ascending order</a>
       <a class="dropdown-item" href="/movies/list?order=descending">Descending order</a>
-      <a class="dropdown-item dropright">
-        <a class="dropdown-toggle genreStyle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Genres
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonTwo">
-            <a class="dropdown-item" id="Comedy" href="/movies/list?genres=comedy">Comedy</a>
+       <button class="dropdown-toggle genreButton"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Genres
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="/movies/list?genres=comedy">Comedy</a>
             <a class="dropdown-item" href="/movies/list?genres=action">Action</a>
             <a class="dropdown-item" href="/movies/list?genres=horror">Horror</a>
             <a class="dropdown-item" href="/movies/list?genres=romance">Romance</a>
@@ -29,9 +28,7 @@
             <a class="dropdown-item" href="/movies/list?genres=crime">Crime</a>
             <a class="dropdown-item" href="/movies/list?genres=mystery">Mystery</a>
             <a class="dropdown-item" href="/movies/list?genres=sciencefiction">Science Fiction</a>
-          </div>
-        </a>
-      </a>
+      </div>
     </div>
   </div>
 
@@ -40,7 +37,7 @@
   <div class="movieContainer">
     <div id="mainCardContainer">
       {{#each movies}}
-      <div class="col-md-3" id="card">
+      <div class="col-md-3">
         <a href="{{_id}}" class="card text-center cardSubContainer" id={{_id}}>
           {{#if poster}}
           <img class="card-img-top" src={{poster}} alt="Image of {{title}}">
