@@ -168,7 +168,7 @@ div.form {
 }
 
 #search_term {
-  width: 100%;
+  width: 283%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -176,6 +176,7 @@ div.form {
   border-radius: 4px;
   box-sizing: border-box;
 }
+
 
 #inputButton{
   width: 100%;

@@ -8,6 +8,9 @@
 background: linear-gradient(171deg, rgba(240,217,217,1) 0%, rgba(245,141,141,1) 52%, rgba(247,45,45,1) 100%);
 }
 
+.userDetails{
+    font-size: 25px;
+}
 .container-div {
    height: 100%;
     padding: 36px 48px;
