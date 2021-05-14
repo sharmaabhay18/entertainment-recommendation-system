@@ -9,7 +9,7 @@ const routeConstructor = (app) => {
   app.use('/movies', moviesRoutes);
   app.use('/comment', commentRoutes);
   app.use('/commentRating', commentRatingRoutes);
-  app.use('/addList',addList);
+  app.use('/addList', addList);
 
   app.use('/', (req, res) => {
     if (req.session.user) {
