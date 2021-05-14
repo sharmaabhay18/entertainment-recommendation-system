@@ -62,6 +62,8 @@ router.get('/list', async (req, res) => {
     const { order } = req.query;
 
     const movieList = await movies.allMovies();
+    movieList.sort((a, b) => Number(b?.rating?.average) - Number(a?.rating?.average));
+
     let finalList = [];
     if (genres) {
       movieList.map((movie) =>

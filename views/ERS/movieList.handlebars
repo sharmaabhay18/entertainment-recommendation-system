@@ -28,6 +28,7 @@
             <a class="dropdown-item" href="/movies/list?genres=thriller">Thriller</a>
             <a class="dropdown-item" href="/movies/list?genres=crime">Crime</a>
             <a class="dropdown-item" href="/movies/list?genres=mystery">Mystery</a>
+          <a class="dropdown-item" href="/movies/list?genres=sciencefiction">Science Fiction</a>
           </div>
         </a>
       </a>
@@ -47,6 +48,7 @@
               <h5 class="card-title">{{ title }} </h5>
               <p class="card-text text-muted">{{tagline}}</p>
               <p class="card-text"><small class="text-muted">Released on {{release_date}}</small></p>
+            <h6><span class="fa fa-star checked"></span> {{rating.average}}/5</h6>
             </div>
           </div>
         </a>
@@ -55,7 +57,7 @@
     </div>
   </div>
   {{else}}
-  <h1 class="nomovies"> No Movies under this Genres!<h1>
+  <h1 class="nomovies"> No Movies under this Genre!<h1>
       {{/if}}
 </div>
 
