@@ -219,6 +219,18 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+const populateMovieDetails = async (user) => {
+  return await Promise.all(
+    user?.movies?.map(async (movie) => {
+      const isMoviePresent = await movies.getByExternalId(parseInt(movie?.external_id));
+      if (isMoviePresent) {
+        return { ...movie, movieDetails: isMoviePresent };
+      }
+      throw 'Something went wrong while populating movies';
+    })
+  );
+};
+
 //update rating and status of movie
 router.patch('/update', async (req, res) => {
   try {
@@ -280,24 +292,26 @@ router.patch('/update', async (req, res) => {
     const isMoviePresent = await movies.getByExternalId(parseExtId);
     if (isMoviePresent.length === 0) {
       return res.status(400).json({ status: false, message: 'No movie present to update' });
+    } else if (status && rating) {
+      await updateRating(isMoviePresent, rating, userId);
+      const finalUser = await users.updateMovieList(userId, { externalId, status });
+      const moviePayload = await populateMovieDetails(finalUser);
+      finalUser.movies = moviePayload;
+      req.session.user = finalUser;
     } else if (rating) {
-      updateRating(isMoviePresent, rating, userId);
+      //update user rating for movie
+      await updateRating(isMoviePresent, rating, userId);
+      const userPayload = await users.getUserById(userId);
+      const userWithMovieDetails = await populateMovieDetails(userPayload);
+      userPayload.movies = userWithMovieDetails;
+      req.session.user = userPayload;
+    } else if (status) {
+      //update user status for movie
+      const updatedUser = await users.updateMovieList(userId, { externalId, status });
+      const finalMoviePayload = await populateMovieDetails(updatedUser);
+      updatedUser.movies = finalMoviePayload;
+      req.session.user = updatedUser;
     }
-
-    //update user status for movie
-    const updatedUser = await users.updateMovieList(userId, { externalId, status });
-
-    const finalMoviePayload = await Promise.all(
-      updatedUser?.movies?.map(async (movie) => {
-        const isMoviePresent = await movies.getByExternalId(parseInt(movie?.external_id));
-        if (isMoviePresent) {
-          return { ...movie, movieDetails: isMoviePresent };
-        }
-        throw 'Something went wrong while populating movies';
-      })
-    );
-    updatedUser.movies = finalMoviePayload;
-    req.session.user = updatedUser;
 
     res.status(200).json({
       status: true,
@@ -375,7 +389,7 @@ router.post('/add-movie', async (req, res) => {
       await movies.create(updatedMovie, rating, userId);
     } else {
       //update movie rating based on user ratings
-      updateRating(isMoviePresent, rating, userId);
+      await updateRating(isMoviePresent, rating, userId);
     }
 
     //update user status for movie
