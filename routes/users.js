@@ -39,7 +39,7 @@ router.post('/login', async (req, res) => {
 
         req.session.user = user;
 
-        res.status(200).redirect('/movies/list');
+        res.status(200).redirect('/addList');
         //redirect user to movies page
       } else {
         res.status(400).send('Wrong password. <a href="/">Go to Login</a>');

@@ -42,9 +42,23 @@
 
 .user-profile-icon{
   font-size: 26px;
-  padding: 0px 36px;
+  padding: 0px 26px;
   color: #fafafa;
 }
+
+.addListButton{
+  background: #dc143c;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 12px;
+  font-weight: 700;
+  padding: 6px 30px;
+  position: relative;
+  right: 13px;
+  transition: all 0.2s ease-in-out;
+}
+
 .button-a,.button-a:hover,.button-a:visited{
 color:#fff;
 text-decoration: none;
