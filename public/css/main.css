@@ -2,21 +2,20 @@ body {
   background-color: white;
   margin: 0px;
   position: relative;
+  height: 100vh;
   min-height: 100%;
   min-height: 100vh;
-  padding-top: 52px;
-  /* height: 100vh; */
+  padding-top: 71px;
+  
 }
 
 .main-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
 }
 
 .main-body {
-  height: 100%;
   display: flex;
   flex-direction: column;
 }
