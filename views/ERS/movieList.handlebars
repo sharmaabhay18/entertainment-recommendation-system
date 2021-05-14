@@ -15,8 +15,8 @@
       <a class="dropdown-item" href="/movies/list?order=ascending">Ascending order</a>
       <a class="dropdown-item" href="/movies/list?order=descending">Descending order</a>
       <a class="dropdown-item dropright">
-        <a class="dropdown-toggle genreStyle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
+        <a class="dropdown-toggle genreStyle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
           Genres
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonTwo">
             <a class="dropdown-item" id="Comedy" href="/movies/list?genres=comedy">Comedy</a>
@@ -28,7 +28,7 @@
             <a class="dropdown-item" href="/movies/list?genres=thriller">Thriller</a>
             <a class="dropdown-item" href="/movies/list?genres=crime">Crime</a>
             <a class="dropdown-item" href="/movies/list?genres=mystery">Mystery</a>
-          <a class="dropdown-item" href="/movies/list?genres=sciencefiction">Science Fiction</a>
+            <a class="dropdown-item" href="/movies/list?genres=sciencefiction">Science Fiction</a>
           </div>
         </a>
       </a>
@@ -42,13 +42,30 @@
       {{#each movies}}
       <div class="col-md-3" id="card">
         <a href="{{_id}}" class="card text-center cardSubContainer" id={{_id}}>
+          {{#if poster}}
           <img class="card-img-top" src={{poster}} alt="Image of {{title}}">
+          {{else}}
+          <img src="/images/image.jpeg" id="image" alt="no image">
+          {{/if}}
           <div class="card-block">
             <div class="card-body">
+
+              {{#if title}}
               <h5 class="card-title">{{ title }} </h5>
+              {{/if}}
+
+              {{#if tagline}}
               <p class="card-text text-muted">{{tagline}}</p>
+              {{/if}}
+
+              {{#if release_date}}
               <p class="card-text"><small class="text-muted">Released on {{release_date}}</small></p>
-            <h6><span class="fa fa-star checked"></span> {{rating.average}}/5</h6>
+              {{/if}}
+
+              {{#if rating.average}}
+              <h6><span class="fa fa-star checked"></span> {{rating.average}}/5</h6>
+              {{/if}}
+
             </div>
           </div>
         </a>

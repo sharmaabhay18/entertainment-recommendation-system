@@ -38,10 +38,31 @@
         <tbody class="list-item">
             <tr class="list-table-data">
                 <td></td>
-                <td class="data"><img id="imageData" src={{movieDetails.poster}}></td>
+                {{#if movieDetails.poster}}
+                <td class="data"><img id="imageData" src={{movieDetails.poster}} alt=""></td>
+                {{else}}
+                <td class="data"><img id="imageData" src="/images/image.jpeg" alt=""></td>
+                {{/if}}
+
+
+                {{#if movieDetails.title}}
                 <td class="data" id="titleData">{{movieDetails.title}}</td>
+                {{else}}
+                <td class="data" id="titleData">N/A</td>
+                {{/if}}
+
+                {{#if movieDetails.release_date}}
                 <td class="data" id="releaseData">{{movieDetails.release_date}}</td>
+                {{else}}
+                <td class="data" id="releaseData">N/A</td>
+                {{/if}}
+
+                {{#if movieDetails.rating.average}}
                 <td class="data" id="ratingData">{{movieDetails.rating.average}}</td>
+                {{else}}
+                <td class="data" id="ratingData">N/A</td>
+                {{/if}}
+
                 <td class="data" id="editData"><a href="/addList/editPage?id='{{external_id}}'" class="editButton"
                         id="{{external_id}}">Edit</a></td>
             </tr>
