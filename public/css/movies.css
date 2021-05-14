@@ -119,10 +119,6 @@
   color: #6c757d;
 }
 
-.ratingStyle {
-  color: #6c757d;
-}
-
 .likeContainer {
   margin-left: 32px;
   background: #fff;
@@ -178,6 +174,10 @@
   background: #ccc;
 }
 
+#commentBody {
+  width: 100%;
+}
+
 .directionRowComment {
   display: flex;
   flex-direction: row;
@@ -222,4 +222,5 @@
 
 .ratingHeadingStyle {
   font-size: 24px;
+  color: #6c757d;
 }
