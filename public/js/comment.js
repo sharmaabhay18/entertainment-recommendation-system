@@ -1,6 +1,7 @@
 $(document).ready(function () {
-  $('#like svg').click(function () {
+  $('.rateContainer .userRatingContainer #like').on('click', 'svg', function () {
     const likeId = this.id;
+
     const isUserLoggedIn = document.querySelector('#like').getAttribute('data-value');
     if (isUserLoggedIn === 'false') {
       alert('You need to login to like/dislike comment');
@@ -40,7 +41,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-  $('#alreadyliked svg').click(function () {
+  $('.rateContainer .userRatingContainer #alreadyliked').on('click', 'svg', function () {
     const alreadyLikedId = this.id;
     const isUserLoggedIn = document.querySelector('#alreadyliked').getAttribute('data-value');
     if (isUserLoggedIn === 'false') {
@@ -80,7 +81,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-  $('#alreadydisliked svg').click(function () {
+  $('.rateContainer .userRatingContainer #alreadydisliked').on('click', 'svg', function () {
     const alreadyDislikedId = this.id;
     const isUserLoggedIn = document.querySelector('#alreadydisliked').getAttribute('data-value');
     if (isUserLoggedIn === 'false') {
@@ -120,7 +121,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-  $('#dislike svg').click(function () {
+  $('.rateContainer .userRatingContainer #dislike').on('click', 'svg', function () {
     const dislikeId = this.id;
 
     const isUserLoggedIn = document.querySelector('#dislike').getAttribute('data-value');
