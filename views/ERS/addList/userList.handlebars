@@ -1,0 +1,54 @@
+{{>header}}
+
+<div class="container" id="container">
+    <div id="headData">
+        <h1>MyList</h1>
+        <p>HOW MUCH MOVIES HAVE YOU SEEN?</p>
+    </div>
+
+    <div class="status-menu-container">
+        <div class="status-menu">
+            <a href="/addList" id="allMovies" class="status-button">All movies</a>
+            <a href="" id="inprogress" class="status-button">Currently Watching</a>
+            <a href="" id="completed" class="status-button">Completed</a>
+            <a href="" id="onhold" class="status-button">On Hold</a>
+            <a href="" id="dropped" class="status-button">Dropped</a>
+            <a href="" id="plantowatch" class="status-button">Plan to Watch</a>
+            <a href="/addList/addMovie" class="status-button">Add movies</a>
+        </div>
+    </div>
+
+    <div id="addHeader3">All Movie</div>
+
+
+    <table data-items="[]" class="list-table">
+        <tbody>
+            <tr class="list-table-header">
+                <th></th>
+                <th>Image</th>
+                <th>Movie Title</th>
+                <th>Release Date</th>
+                <th>Average Rating</th>
+            </tr>
+        </tbody>
+    </table>
+
+    {{#each list}}
+    <table>
+        <tbody class="list-item">
+            <tr class="list-table-data">
+                <td></td>
+                <td class="data"><img id="imageData" src={{movieDetails.poster}}></td>
+                <td class="data" id="titleData">{{movieDetails.title}}</td>
+                <td class="data" id="releaseData">{{movieDetails.release_date}}</td>
+                <td class="data" id="ratingData">{{movieDetails.rating.average}}</td>
+                <td class="data" id="editData"><a href="/addList/editPage?id='{{external_id}}'" class="editButton"
+                        id="{{external_id}}">Edit</a></td>
+            </tr>
+        </tbody>
+        {{/each}}
+
+    </table>
+
+
+</div>

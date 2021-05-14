@@ -1,0 +1,29 @@
+{{>header}}
+<div class="container">
+    <div id="addHeaderEdit">Edit Movie</div>
+    <div class="libody">
+        <form method="POST" action="/addList" id="editForm">
+            <label for="Status">Status : </label>
+            <select name="status" id="editStatus" class="inputtext">
+                <option value="0">Select status</option>
+                <option value="inprogress">Currently Watching</option>
+                <option value="completed">Completed</option>
+                <option value="onhold">On-Hold</option>
+                <option value="dropped">Dropped</option>
+                <option value="plantowatch">Plan to Watch</option>
+            </select>
+            <br />
+            <label for="score">Rating : </label>
+            <select name="score" id="editRating" class="inputtext">
+                <option value="0">Select score</option>
+                <option value="5">(5) Masterpiece</option>
+                <option value="4">(4) Great</option>
+                <option value="3">(3) Very Good</option>
+                <option value="2">(2) Good</option>
+                <option value="1">(1) Fine</option>
+            </select>
+            <br />
+            <button type="submit" id="editB" class="editB">submit</button>
+        </form>
+    </div>
+</div>

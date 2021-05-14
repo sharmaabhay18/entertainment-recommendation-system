@@ -2,12 +2,15 @@ const usersRoutes = require('./users');
 const moviesRoutes = require('./movies');
 const commentRoutes = require('./comments');
 const commentRatingRoutes = require('./commentRating');
+const addList = require('./addList');
 
 const routeConstructor = (app) => {
+  app.use('/addList', addList);
   app.use('/users', usersRoutes);
   app.use('/movies', moviesRoutes);
   app.use('/comment', commentRoutes);
   app.use('/commentRating', commentRatingRoutes);
+  app.use('/addList', addList);
 
   app.use('/', (req, res) => {
     if (req.session.user) {
