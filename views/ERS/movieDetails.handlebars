@@ -128,8 +128,10 @@
     {{#if user}}
     <div>
         <form id="addComment">
-            <h4>Add comments</h4>
-            <textarea placeholder="Please enter comment here" name="commentContent" id="commentBody"></textarea>
+            <h3>Add comments</h3>
+            <label for="commentBody">
+            <textarea placeholder="Please enter comment here" name="commentContent" id="commentBody" ></textarea>
+            </label>
             <button form="addComment" type="submit" name="commentAdd" id="submitComment" >
                 Submit
             </button>

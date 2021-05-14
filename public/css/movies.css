@@ -169,6 +169,10 @@
   background: #ccc;
 }
 
+#commentBody{
+  width: 100%;
+}
+
 .directionRowComment {
   display: flex;
   flex-direction: row;
