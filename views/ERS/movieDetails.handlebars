@@ -139,10 +139,10 @@
 
 
     {{#if movies.comments}}
-    <h4 class="commentHeading">Comments</h4>
+    <h3 class="commentHeading">Comments</h3>
     {{#each movies.comments}}
     <div class="commentStyle">
-        <h6 class="commentName">{{user.firstname}}</h6>
+        <h4 class="commentName">{{user.firstname}}</h4>
         <p class="commentMessageStyle">{{message}}</p>
     </div>
     <div class="directionRowComment">
@@ -157,7 +157,7 @@
                     <i value={{_id}} id='{{_id}}like' class="far fa-thumbs-up"></i>
                 </div>
                 {{/if}}
-                <h6>{{rating.like}}</h6>
+                <h5>{{rating.like}}</h5>
             </div>
             <div class="userRatingContainer">
                 {{#if userDisliked}}
@@ -169,7 +169,7 @@
                     <i value={{_id}} id='{{_id}}dislike' class="far fa-thumbs-down"></i>
                 </div>
                 {{/if}}
-                <h6>{{rating.dislike}}</h6>
+                <h5>{{rating.dislike}}</h5>
             </div>
         </div>
         {{#if validUser}}

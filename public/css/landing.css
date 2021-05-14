@@ -21,11 +21,11 @@
   position: absolute;
   left: 50%;
   top: 35%;
-  color: white;
+  color: #949494;
   font-size: 28px;
   width: 80% !important;
 }
-.centerSubContainerStyle h3 {
+.centerSubContainerStyle h1 {
   font-size: 32px;
   margin-bottom: 40px;
 }
