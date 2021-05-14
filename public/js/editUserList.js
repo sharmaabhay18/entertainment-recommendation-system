@@ -24,17 +24,41 @@ const getUrlParameter = function getUrlParameter(sParam) {
       const newExternalId = getUrlParameter('id').replace(/['"]+/g, '');
       const newStatus = $('#editStatus').val();
       const newRating = $('#editRating').val();
-      if (newStatus != 0 && newRating != 0) {
-        const requestConfig = {
-          method: 'PATCH',
-          url: '/movies/update',
-          contentType: 'application/json',
-          data: JSON.stringify({
-            status: newStatus,
-            externalId: newExternalId,
-            rating: newRating,
-          }),
-        };
+      if (newStatus != 0 || newRating != 0) {
+        let requestConfig = {};
+        if (newStatus == 0) {
+          requestConfig = {
+            method: 'PATCH',
+            url: '/movies/update',
+            contentType: 'application/json',
+            data: JSON.stringify({
+              externalId: newExternalId,
+              rating: newRating,
+            }),
+          };
+        } else if (newRating == 0) {
+          requestConfig = {
+            method: 'PATCH',
+            url: '/movies/update',
+            contentType: 'application/json',
+            data: JSON.stringify({
+              status: newStatus,
+              externalId: newExternalId,
+            }),
+          };
+        } else {
+          requestConfig = {
+            method: 'PATCH',
+            url: '/movies/update',
+            contentType: 'application/json',
+            data: JSON.stringify({
+              status: newStatus,
+              externalId: newExternalId,
+              rating: newRating,
+            }),
+          };
+        }
+
         $.ajax(requestConfig)
           .then(function (responseMessage) {
             window.location.href = '/addList';

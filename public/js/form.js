@@ -30,9 +30,9 @@ const divElem = document.getElementById('show');
               $('#showList').show();
               let li = document.createElement('li');
               li.innerHTML =
-                `<a href="">${e.title}</a>` +
+                `<a href="" id="${e.id}title">${e.title}</a>` +
                 `<p><strong>Release Date : </strong>${release_dateCheck}<p>` +
-                `<a href="" class="addButton" id="${e.title}">Add</a>`;
+                `<a href="" class="addButton" id="${e.id}">Add</a>`;
               li.setAttribute('class', 'libody');
               myUl.appendChild(li);
             });
@@ -63,25 +63,15 @@ const divElem = document.getElementById('show');
       $('#showList').hide();
       $('#show').empty();
       $('#show').show();
-      let urll = $(this).attr('id');
-      let pageLaod = {
-        method: 'GET',
-        url: '/movies/search?searchTerm=' + urll,
-      };
-      $.ajax(pageLaod).then(function (responseMessage) {
-        let exId = 0;
-        responseMessage.movies.map((e) => {
-          if (e.title == urll) {
-            exId += e.id;
-          }
-        });
-        $('#addHeader2').show();
-        let html =
-          `<form method="POST" id="movieForm">` +
-          `<h1>${urll}</h1>` +
-          `<hr>` +
-          `<label for="Status">Status<span>*</span> : </label>` +
-          `<select name="status" id="status" class ="inputtext" required>
+      const extId = $(this).attr('id');
+      const urll = document.getElementById(`${extId}title`).innerText;
+      $('#addHeader2').show();
+      let html =
+        `<form method="POST" id="movieForm">` +
+        `<h1>${urll}</h1>` +
+        `<hr>` +
+        `<label for="Status">Status<span>*</span> : </label>` +
+        `<select name="status" id="status" class ="inputtext" required>
           <option value="0">Select status</option>
           <option value="inprogress">Currently Watching</option>
           <option value="completed">Completed</option>
@@ -89,9 +79,9 @@ const divElem = document.getElementById('show');
           <option value="dropped">Dropped</option>
           <option value="plantowatch">Plan to Watch</option>
           </select>` +
-          `<br/>` +
-          `<label for="score">Rating<span>*</span> : </label>` +
-          `<select name="score" id="rating" class ="inputtext" required>
+        `<br/>` +
+        `<label for="score">Rating<span>*</span> : </label>` +
+        `<select name="score" id="rating" class ="inputtext" required>
             <option value="0">Select score</option>
             <option value="5">(5) Masterpiece</option>
             <option value="4">(4) Great</option>
@@ -99,12 +89,11 @@ const divElem = document.getElementById('show');
             <option value="2">(2) Good</option>
             <option value="1">(1) Fine</option>
             </select>` +
-          `<br/>` +
-          `<button type="submit" class="addButton1" id="${exId}" >Add</button>` +
-          `<button type="submit" id="addButton2">Cancel</button>` +
-          `</form>`;
-        $('#show').append(html);
-      });
+        `<br/>` +
+        `<button type="submit" class="addButton1" id="${extId}" >Add</button>` +
+        `<button type="submit" id="addButton2">Cancel</button>` +
+        `</form>`;
+      $('#show').append(html);
     });
   });
 
@@ -126,6 +115,10 @@ const divElem = document.getElementById('show');
       let newExternalId = $(this).attr('id');
       let newStatus = $('#status').val();
       let newRating = $('#rating').val();
+      console.log(newExternalId);
+      console.log(newStatus);
+      console.log(newRating);
+
       if (newStatus != 0 && newRating != 0) {
         const requestConfig = {
           method: 'POST',

@@ -27,4 +27,8 @@ router.get('/addMovie', async (req, res) => {
   res.render('ERS/addList/addMovie');
 });
 
+router.get('/editPage', async (req, res) => {
+  res.render('ERS/addList/editPage');
+});
+
 module.exports = router;

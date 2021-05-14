@@ -254,12 +254,12 @@ router.patch('/update', async (req, res) => {
         return res
           .status(400)
           .json({ status: false, message: 'Please make sure status is of string type and is non empty' });
-    }
 
-    try {
-      errorValidator.isMovieStatusValid(status);
-    } catch (error) {
-      return res.status(400).json({ message: error });
+      try {
+        errorValidator.isMovieStatusValid(status);
+      } catch (error) {
+        return res.status(400).json({ message: error });
+      }
     }
 
     try {
