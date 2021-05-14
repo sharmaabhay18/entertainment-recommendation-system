@@ -96,6 +96,16 @@ nav li:nth-last-child(3)
   justify-content: flex-end;
 }
 
+nav li:nth-last-child(2)
+{
+    float:right;
+}
+
+nav li:last-child
+{
+    float:right;
+}
+
 #container{
 position: relative;
 border: #EBEBEB 10px  solid;
@@ -367,6 +377,13 @@ select{
   border: #EBEBEB 1px solid;
 }
 
+.list-item{
+  width: 100%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  border: #EBEBEB 1px solid;
+}
+
 tr {
   display: table-row;
   vertical-align: inherit;
@@ -418,3 +435,9 @@ tr {
 }
 
 
+.main-body{
+height: 100%;
+display: flex;
+flex-direction:column
+}
+  
