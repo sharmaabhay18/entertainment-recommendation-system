@@ -143,19 +143,6 @@ router.get('/profile', async (req, res) => {
   }
 });
 
-router.get('/home', async (req, res) => {
-  if (req.session.user) {
-    res.render('ERS/home', {
-      title: 'Nav',
-      loggIn: false,
-      userDetails: req.session.user,
-      isDefaultRoute: false,
-    });
-  } else {
-    res.redirect('/');
-  }
-});
-
 function validateEmail(email) {
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());

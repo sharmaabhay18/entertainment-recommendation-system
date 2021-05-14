@@ -7,7 +7,7 @@
 }
 
 .centered {
-  background: linear-gradient(to bottom, rgba(0, 47, 75, 0.8) 0%, rgba(220, 66, 37, 0.7) 100%); /* W3C */
+  background: linear-gradient(to bottom, rgba(0, 47, 75, 1) 0%, rgba(220, 66, 37, 0.7) 100%); /* W3C */
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -21,7 +21,7 @@
   position: absolute;
   left: 50%;
   top: 35%;
-  color: #949494;
+  color: #b17f35;
   font-size: 28px;
   width: 80% !important;
 }

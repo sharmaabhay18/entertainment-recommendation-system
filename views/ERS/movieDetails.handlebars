@@ -128,7 +128,7 @@
     {{#if user}}
     <div>
         <form id="addComment">
-            <h4>Add comments</h4>
+            <h3>Add comments</h3>
             <textarea placeholder="Please enter comment here" name="commentContent" id="commentBody"></textarea>
             <button form="addComment" type="submit" name="commentAdd" id="submitComment" >
                 Submit
@@ -157,7 +157,7 @@
                     <i value={{_id}} id='{{_id}}like' class="far fa-thumbs-up"></i>
                 </div>
                 {{/if}}
-                <h5>{{rating.like}}</h5>
+                <h4>{{rating.like}}</h4>
             </div>
             <div class="userRatingContainer">
                 {{#if userDisliked}}
@@ -169,7 +169,7 @@
                     <i value={{_id}} id='{{_id}}dislike' class="far fa-thumbs-down"></i>
                 </div>
                 {{/if}}
-                <h5>{{rating.dislike}}</h5>
+                <h4>{{rating.dislike}}</h4>
             </div>
         </div>
         {{#if validUser}}
@@ -185,7 +185,7 @@
     {{#if user}}
     {{else}}
     <div class='noComments'>
-    <h4>No comments available! Please <a href="/">login</a> to add comments</h4>
+    <h3>No comments available! Please <a href="/">login</a> to add comments</h3>
     </div>
     {{/if}}
     {{/if}}

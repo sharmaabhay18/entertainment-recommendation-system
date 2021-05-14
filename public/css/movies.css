@@ -106,12 +106,21 @@
   font-size: 20px;
 }
 
-.commentHeading{
-  font-size: 25px;
+.commentHeading {
+  font-size: 24px;
+  margin-left: 20px;
 }
 
 .commentMessageStyle {
   padding: 0px 20px;
+}
+
+.card-body h5 {
+  color: #6c757d;
+}
+
+.ratingStyle {
+  color: #6c757d;
 }
 
 .likeContainer {
@@ -182,7 +191,7 @@
   width: 100px;
   border-radius: 10px;
   margin: 10px 0px;
-  background: red;
+  background: #dc143c;
   color: white;
   pointer-events: all;
 }
@@ -198,17 +207,19 @@
 .userRatingContainer {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
 }
 
-.userRatingContainer h6 {
+.userRatingContainer h4 {
   margin: 0 5px;
+  font-size: 16px;
 }
 
 .genreStyle {
   padding-left: 25px;
 }
 
-.ratingHeadingStyle{
+.ratingHeadingStyle {
   font-size: 24px;
 }
