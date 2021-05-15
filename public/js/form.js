@@ -15,6 +15,7 @@ const divElem = document.getElementById('show');
         $('#showList').empty();
         $('#show').empty();
         $('#show').hide();
+        $('#addHeader2').hide();
         let pageLaod = {
           method: 'GET',
           url: ' /movies/search?searchTerm=' + textInput.value,
