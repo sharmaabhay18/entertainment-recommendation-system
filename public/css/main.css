@@ -177,7 +177,6 @@ div.form {
   box-sizing: border-box;
 }
 
-
 #inputButton{
   width: 100%;
   background-color: #dc143c;
@@ -443,3 +442,4 @@ flex-direction:column
 .checked {
   color: orange;
 }
+
