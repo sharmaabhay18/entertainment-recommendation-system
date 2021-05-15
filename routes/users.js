@@ -45,11 +45,11 @@ router.post('/login', async (req, res) => {
         //redirect user to movies page
       } else {
         // password did not matched
-        return res.status(400).send('Wrong password. <a href="/">Go to Login</a>');
+        return res.status(400).send('Wrong password. <a href="/">Go to Home</a>');
       }
     } else {
       //user not found
-      return res.status(404).send('Username not found. <a href="/">Go to Login</a>');
+      return res.status(404).send('Username not found. <a href="/">Go to Home</a>');
     }
   } catch (error) {
     return res.status(500).redirect('/');

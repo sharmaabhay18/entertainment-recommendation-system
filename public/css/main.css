@@ -156,8 +156,23 @@ text-align: left;
   font-family: 'Helvetica neue', Helvetica, "lucida grande", tahoma, verdana, arial, sans-serif;
   text-align: center;
   vertical-align: middle;
-  font-size: 1.6em;
   color: rgb(77, 75, 75);
+}
+
+.statusHeader{
+  font-size: 22px;
+}
+
+@media screen and (max-width: 1200px) {
+  .statusHeader {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .statusHeader {
+    font-size: 14px;
+  }
 }
 
 div.form {
