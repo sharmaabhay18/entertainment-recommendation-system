@@ -8,7 +8,7 @@
 <div class="float-container">
     <div class="float-child">
         {{#if movies.poster}}
-        <img src={{movies.poster}} id="image" alt={{movies.title}}>
+        <img src={{movies.poster}} id="image" alt="{{movies.title}}">
         {{else}}
         <img src="/images/image.jpeg" id="image" alt="no movie image">
         {{/if}}
@@ -16,9 +16,9 @@
     <div class="float-child">
         <div>
             {{#if movies.title}}
-            <h1 class="title "> {{movies.title}}</h1>
+            <h1 class="title"> {{movies.title}}</h1>
             {{else}}
-            <h1 class="title "> No Title</h1>
+            <h1 class="title"> No Title</h1>
             {{/if}}
         </div>
         <div class="directionRow">
@@ -37,7 +37,7 @@
         <div class="directionRow">
             <h2>Genres: </h2>
             {{#each movies.genres}}
-            <p id="inline">{{name}}</p>
+            <p class="inline">{{name}}</p>
             {{/each}}
         </div>
         {{else}}
@@ -151,24 +151,24 @@
         <div class="rateContainer">
             <div class="userRatingContainer">
                 {{#if userLiked}}
-                <div data-value={{isUserLoggedIn}} id="alreadyliked" class="likeContainer">
-                    <i value={{_id}} id='{{_id}}alreadyliked' class="fas fa-thumbs-up"></i>
+                <div data-value={{isUserLoggedIn}} id="{{_id}}al" class="alreadylikedContainer">
+                    <i data-value={{_id}} id='{{_id}}alreadyliked' class="fas fa-thumbs-up"></i>
                 </div>
                 {{else}}
-                <div data-value={{isUserLoggedIn}} id="like" class="likeContainer">
-                    <i value={{_id}} id='{{_id}}like' class="far fa-thumbs-up"></i>
+                <div data-value={{isUserLoggedIn}} id="{{_id}}l" class="likeContainer">
+                    <i data-value={{_id}} id='{{_id}}like' class="far fa-thumbs-up"></i>
                 </div>
                 {{/if}}
                 <h4>{{rating.like}}</h4>
             </div>
             <div class="userRatingContainer">
                 {{#if userDisliked}}
-                <div data-value={{isUserLoggedIn}} id="alreadydisliked" class="likeContainer">
-                    <i value={{_id}} id='{{_id}}alreadydisliked' class="fas fa-thumbs-down"></i>
+                <div data-value={{isUserLoggedIn}} id="{{_id}}ad" class="alreadyDislikedContainer">
+                    <i data-value={{_id}} id='{{_id}}alreadydisliked' class="fas fa-thumbs-down"></i>
                 </div>
                 {{else}}
-                <div data-value={{isUserLoggedIn}} id="dislike" class="likeContainer">
-                    <i value={{_id}} id='{{_id}}dislike' class="far fa-thumbs-down"></i>
+                <div data-value={{isUserLoggedIn}} id="{{_id}}d" class="dislikeContainer">
+                    <i data-value={{_id}} id='{{_id}}dislike' class="far fa-thumbs-down"></i>
                 </div>
                 {{/if}}
                 <h4>{{rating.dislike}}</h4>
@@ -192,7 +192,7 @@
     {{/if}}
     {{/if}}
 </div>
-</div>
+
 <div class="footer">
     {{>footer}}
 </div>

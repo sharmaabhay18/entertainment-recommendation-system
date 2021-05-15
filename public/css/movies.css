@@ -40,7 +40,14 @@
   padding: 20px;
   border: 2px solid white;
 }
-#inline {
+
+@media screen and (max-width: 1100px) {
+  .float-child {
+    width: 100%;
+  }
+}
+
+.inline {
   display: inline;
 }
 
@@ -119,7 +126,7 @@
   color: #6c757d;
 }
 
-.likeContainer {
+.userRatingContainer div {
   margin-left: 32px;
   background: #fff;
   width: 25px;
@@ -131,8 +138,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   cursor: pointer;
 }
-
-.likeContainer i {
+.userRatingContainer i {
   font-size: 90px;
   transition: 0.5s;
   margin-left: 5px;
@@ -218,7 +224,7 @@
 
 .genreButton {
   padding-left: 25px !important;
-  width: 90%;  
+  width: 90%;
   background: #dc143c;
   border: none;
   color: white;
