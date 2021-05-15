@@ -2,12 +2,14 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 
 const router = express.Router();
+const xss = require('xss');
 const movies = require('../data/recommendedMovies');
 const { users } = require('../data');
 
 router.post('/login', async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const username = xss(req.body.username);
+    const password = xss(req.body.password);
     if (!username || !password) {
       res.status(400).send({ error: 'All fields are mandatory' });
       return;
@@ -55,9 +57,12 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/create', async (req, res) => {
-  const userPostData = req.body;
   try {
-    let { username, firstname, lastname, email, password } = userPostData;
+    const username = xss(req.body.username);
+    const firstname = xss(req.body.firstname);
+    const lastname = xss(req.body.lastname);
+    const email = xss(req.body.email);
+    const password = xss(req.body.password);
     let userNames = await users.getAllUserName();
     let emailIds = await users.getAllEmailId();
 

@@ -1,5 +1,6 @@
 const { ObjectId } = require('mongodb');
 const express = require('express');
+const xss = require('xss');
 
 const errorValidator = require('../utils/errorValidation');
 const { isStatusValid } = require('../utils/commentRatingEnum');
@@ -11,7 +12,9 @@ const router = express.Router();
 
 //Add comment rating
 router.post('/', async (req, res) => {
-  const { commentId, status } = req.body;
+  const commentId = xss(req.body.commentId);
+  const status = xss(req.body.status);
+
   const userId = req.session?.user?._id.toString();
 
   if (!userId) {
