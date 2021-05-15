@@ -27,18 +27,16 @@ If you prefer video watch this => https://www.youtube.com/watch?v=leNNivaQbDY
 
 Your site is now running at `http://localhost:3000`!
 
+**Note**: Node version should be 14 or 14+
 ## Linting
 
 1. Run ```npm lint:js``` to check the linter error
 2. Run ```npm lint:js:fix``` to check the linter error and fix them automatically.
-
-**Note**: Node version should be 14 or 14+
  
 ## 🧐 What's inside?
 
 A quick look at the top-level files and directories you'll see in a  project.
 
-.
 ├── .husky
 
 ├── api
