@@ -58,11 +58,11 @@ router.post('/login', async (req, res) => {
 
 router.post('/create', async (req, res) => {
   try {
-    const username = xss(req.body.username);
-    const firstname = xss(req.body.firstname);
-    const lastname = xss(req.body.lastname);
-    const email = xss(req.body.email);
-    const password = xss(req.body.password);
+    let username = xss(req.body.username);
+    let firstname = xss(req.body.firstname);
+    let lastname = xss(req.body.lastname);
+    let email = xss(req.body.email);
+    let password = xss(req.body.password);
     let userNames = await users.getAllUserName();
     let emailIds = await users.getAllEmailId();
 
@@ -106,7 +106,7 @@ router.post('/create', async (req, res) => {
     password = await bcrypt.hash(password, 16);
     const newUser = await users.createuser(username, firstname, lastname, email, password);
     req.session.user = newUser;
-    res.status(200).redirect('/movies/list');
+    res.status(200).redirect('/addList');
   } catch (e) {
     res.status(500).redirect('/');
   }
