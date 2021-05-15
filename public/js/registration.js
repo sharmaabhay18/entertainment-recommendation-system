@@ -129,12 +129,6 @@ $('#loginForm').on('submit', function () {
     success: function (data) {
       alert('Login successfull');
     },
-    error: function (error) {
-      if (error?.status === 403) {
-        alert(error?.responseJSON?.message);
-      }
-      window.location.href = '/';
-    },
   });
 });
 
