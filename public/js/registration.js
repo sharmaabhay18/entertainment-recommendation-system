@@ -134,18 +134,23 @@ $('#loginForm').on('submit', function () {
 
 $('#registerForm').on('submit', function () {
   $('#signup-submit').attr('disabled', 'disabled');
-  fetch(event.target.action, {
-    method: 'POST',
-    body: new URLSearchParams(new FormData(event.target)), // event.target is the form
-  }).then((resp) => {
-    if (resp.status === 400) {
-      $('#signup-submit').removeAttr('disabled');
-      alert('Something went wrong');
-    }
-    if (resp.status === 404) {
-      $('#signup-submit').removeAttr('disabled');
-      alert('Something went wrong');
-    }
+  $.ajax({
+    type: 'POST',
+    url: '/users/create',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: new URLSearchParams(new FormData(event.target)),
+    success: function (resp) {
+      if (resp.status === 400) {
+        $('#signup-submit').removeAttr('disabled');
+        alert('Something went wrong');
+      }
+      if (resp.status === 404) {
+        $('#signup-submit').removeAttr('disabled');
+        alert('Something went wrong');
+      }
+    },
   });
 });
 
