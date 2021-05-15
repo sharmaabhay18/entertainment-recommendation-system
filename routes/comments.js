@@ -1,5 +1,6 @@
 const { ObjectId } = require('mongodb');
 const express = require('express');
+const xss = require('xss');
 
 const errorValidator = require('../utils/errorValidation');
 
@@ -12,7 +13,9 @@ const router = express.Router();
 //Add comment for specified movie
 router.post('/add', async (req, res) => {
   try {
-    const { movieId, message } = req.body;
+    const movieId = xss(req.body.movieId);
+    const message = xss(req.body.message);
+
     const userId = req.session?.user?._id.toString();
 
     if (!userId) {
@@ -68,7 +71,8 @@ router.post('/add', async (req, res) => {
 
 //Update comment for the user
 router.post('/update', async (req, res) => {
-  const { message, commentId } = req.body;
+  const commentId = xss(req.body.commentId);
+  const message = xss(req.body.message);
   const userId = req.session?.user?._id.toString();
 
   if (!userId) {

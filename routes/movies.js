@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const xss = require('xss');
 
 const errorValidator = require('../utils/errorValidation');
 const movies = require('../data/recommendedMovies');
@@ -8,6 +9,7 @@ const commentRating = require('../data/commentRating');
 const { users } = require('../data');
 
 const router = express.Router();
+
 const { searchApi, imageApi, getMovie } = require('../api/api');
 
 const appendPathToPoster = (movies) => {
@@ -247,7 +249,9 @@ router.patch('/update', async (req, res) => {
       return res.status(400).json({ status: false, message: 'Unauthorized User!' });
     }
 
-    const { status, externalId, rating: userRating } = req.body;
+    const status = xss(req.body.status);
+    const externalId = xss(req.body.externalId);
+    const userRating = xss(req.body.rating);
 
     if (!externalId) throw 'You must provide externalId for movie';
 
@@ -342,7 +346,10 @@ router.post('/add-movie', async (req, res) => {
       return res.status(400).json({ status: false, message: 'Unauthorized User!' });
     }
 
-    const { status, externalId, rating: userRating } = req.body;
+    const status = xss(req.body.status);
+    const externalId = xss(req.body.externalId);
+    const userRating = xss(req.body.rating);
+
     if (!externalId) return res.status(400).json({ status: false, message: 'You must provide externalId for movie' });
     if (!status) return res.status(400).json({ status: false, message: 'You must provide status for movie' });
     if (!userRating) return res.status(400).json({ status: false, message: 'You must provide rating for movie' });
