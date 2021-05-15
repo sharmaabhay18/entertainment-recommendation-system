@@ -39,18 +39,18 @@ router.post('/login', async (req, res) => {
 
         req.session.user = user;
 
-        res.status(200).redirect('/addList');
+        return res.status(200).redirect('/addList');
         //redirect user to movies page
       } else {
-        res.status(400).send('Wrong password. <a href="/">Go to Login</a>');
         // password did not matched
+        return res.status(403).json({ message: 'Wrong Password' });
       }
     } else {
-      res.status(404).send('Username not found. <a href="/">Go to Login</a>');
       //user not found
+      return res.status(403).json({ message: 'Username not found' });
     }
   } catch (error) {
-    res.status(500).redirect('/');
+    return res.status(500).redirect('/');
   }
 });
 

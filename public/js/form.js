@@ -115,9 +115,6 @@ const divElem = document.getElementById('show');
       let newExternalId = $(this).attr('id');
       let newStatus = $('#status').val();
       let newRating = $('#rating').val();
-      console.log(newExternalId);
-      console.log(newStatus);
-      console.log(newRating);
 
       if (newStatus != 0 && newRating != 0) {
         const requestConfig = {

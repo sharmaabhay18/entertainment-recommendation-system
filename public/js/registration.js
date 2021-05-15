@@ -114,26 +114,6 @@ function toggleForm() {
 
 $('#loginForm').on('submit', function () {
   $('#login-submit').attr('disabled', 'disabled');
-  // TODO do something here to show user that form is being submitted
-  // fetch(event.target.action, {
-  //   method: 'POST',
-  //   body: new URLSearchParams(new FormData(event.target)), // event.target is the form
-  // }).then(
-  //   (resp) => {
-  //     console.log(resp); // or resp.text() or whatever the server sends
-  //     if (resp.status === 400) {
-  //       $('#login-submit').removeAttr('disabled');
-  //       alert('Wrong password');
-  //     }
-  //     if (resp.status === 404) {
-  //       $('#login-submit').removeAttr('disabled');
-  //       alert('User not found');
-  //     }
-  //   },
-  //   (error) => {
-  //     console.log(error);
-  //   }
-  // );
   let data = {
     username: $('#login-username').val(),
     password: $('#login-password').val(),
@@ -149,18 +129,21 @@ $('#loginForm').on('submit', function () {
     success: function (data) {
       alert('Login successfull');
     },
-    error: function (error) {},
+    error: function (error) {
+      if (error?.status === 403) {
+        alert(error?.responseJSON?.message);
+      }
+      window.location.href = '/';
+    },
   });
 });
 
 $('#registerForm').on('submit', function () {
   $('#signup-submit').attr('disabled', 'disabled');
-  // TODO do something here to show user that form is being submitted
   fetch(event.target.action, {
     method: 'POST',
     body: new URLSearchParams(new FormData(event.target)), // event.target is the form
   }).then((resp) => {
-    console.log(resp); // or resp.text() or whatever the server sends
     if (resp.status === 400) {
       $('#signup-submit').removeAttr('disabled');
       alert('Something went wrong');
