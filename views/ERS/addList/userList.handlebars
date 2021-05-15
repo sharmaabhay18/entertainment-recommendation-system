@@ -39,9 +39,9 @@
             <tr class="list-table-data">
                 <td></td>
                 {{#if movieDetails.poster}}
-                <td class="data"><img id="imageData" src={{movieDetails.poster}} alt=""></td>
+                <td class="data"><img id="imageData" src={{movieDetails.poster}} alt="{{movieDetails.title}}"></td>
                 {{else}}
-                <td class="data"><img id="imageData" src="/images/image.jpeg" alt=""></td>
+                <td class="data"><img id="imageData" src="/images/image.jpeg" alt="{{movieDetails.title}}"></td>
                 {{/if}}
 
 
@@ -67,9 +67,9 @@
                         id="{{external_id}}">Edit</a></td>
             </tr>
         </tbody>
-        {{/each}}
+  
 
     </table>
-
+      {{/each}}
 
 </div>
