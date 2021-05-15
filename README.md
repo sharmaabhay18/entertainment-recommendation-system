@@ -4,7 +4,8 @@
 Project Group 25
 </h1>
 
-**Note**:  If for some reason if the server/app is not working kindly make sure your ip is whitelisted in mongo atlas. Mongo atlas credentials is provided below. Follow this tutorial to whitelist your IP address => https://docs.atlas.mongodb.com/security/ip-access-list/
+**Note**:  If for some reason if the server/app is not working kindly make sure your ip is whitelisted in mongo atlas. Follow this tutorial to whitelist your IP address => https://docs.atlas.mongodb.com/security/ip-access-list/
+
 If you prefer video watch this => https://www.youtube.com/watch?v=leNNivaQbDY
 
 
@@ -26,11 +27,12 @@ If you prefer video watch this => https://www.youtube.com/watch?v=leNNivaQbDY
 
 Your site is now running at `http://localhost:3000`!
 
-**Linting**
-5. Run ```npm lint:js``` to check the linter error
-6. Run ```npm lint:js:fix``` to check the linter error and fix them automatically.
+## Linting
 
-**Note** Node version should be 14 or 14+
+1. Run ```npm lint:js``` to check the linter error
+2. Run ```npm lint:js:fix``` to check the linter error and fix them automatically.
+
+**Note**: Node version should be 14 or 14+
  
 ## 🧐 What's inside?
 
