@@ -161,6 +161,28 @@ $('#username').keyup(function () {
   }
 });
 
+$('#loginForm > .form-group input').keyup(function () {
+  if ($('#login-password').val().length < 5 || $('#login-username').val() === '') {
+    $('#login-submit').attr('disabled', 'disabled');
+  } else {
+    $('#login-submit').removeAttr('disabled');
+  }
+});
+
+$('#registerForm > .form-group input').keyup(function () {
+  if (
+    $('#password').val().length < 5 ||
+    $('#username').val() === '' ||
+    $('#firstname').val() === '' ||
+    $('#lastname').val() === '' ||
+    $('#email').val() === ''
+  ) {
+    $('#signup-submit').attr('disabled', 'disabled');
+  } else {
+    $('#signup-submit').removeAttr('disabled');
+  }
+});
+
 $('#email').keyup(function () {
   let inputValue = $('#email').val();
   if (emailList.find((ele) => ele == inputValue)) {
