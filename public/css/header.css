@@ -2,13 +2,13 @@
   display: flex;
   justify-content: space-between;
   padding: 16px 24px;
-  background: rgb(43, 41, 41);
+  background: rgb(14,13,13);
   background: radial-gradient(circle, rgba(43, 41, 41, 1) 0%, rgba(66, 66, 66, 1) 50%, rgba(0, 0, 0, 1) 100%);
 }
 
 .title {
   font-size: 24px;
-  color: #fff;
+  color: #b17f35;
   font-weight: 600;
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -18,7 +18,7 @@
 
 .title a {
   text-decoration: none;
-  color: #fff;
+  color: #b17f35;
 }
 
 .button {

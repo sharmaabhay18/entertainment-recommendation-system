@@ -157,7 +157,7 @@ text-align: left;
   text-align: center;
   vertical-align: middle;
   font-size: 1.6em;
-  color: #9B9B9B;
+  color: rgb(77, 75, 75);
 }
 
 div.form {
@@ -168,7 +168,7 @@ div.form {
 }
 
 #search_term {
-  width: 100%;
+  width: 283%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -177,9 +177,10 @@ div.form {
   box-sizing: border-box;
 }
 
+
 #inputButton{
   width: 100%;
-  background-color: #4CAF50;
+  background-color: #dc143c;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -396,25 +397,25 @@ tr {
   border-bottom: #EBEBEB 1px solid;
 }
 
-#imageData{
+.imageData{
   width: 48px;
   height: 68px;
   border: #EBEBEB 1px solid;  
 }
 
-#titleData {
+.titleData {
   width: 350px;
   text-align: center;
 }
 
-#releaseData{
+.releaseData{
   width: 350px;
   text-align: center;
   position:relative; 
   left:30px
 }
 
-#ratingData{
+.ratingData{
   width: 350px;
   text-align: center;
   position:relative; 
@@ -422,7 +423,7 @@ tr {
 }
 
 
-#editData{
+.editData{
   width: 350px;
   text-align: center;
 }

@@ -1,3 +1,7 @@
+{{#section 'head'}}
+<title>Watch List</title>
+{{/section}}
+
 {{>header}}
 
 <div class="container" id="container">
@@ -33,43 +37,41 @@
         </tbody>
     </table>
 
-    {{#each list}}
     <table>
+    {{#each list}}
         <tbody class="list-item">
             <tr class="list-table-data">
                 <td></td>
                 {{#if movieDetails.poster}}
-                <td class="data"><img id="imageData" src={{movieDetails.poster}} alt="{{movieDetails.title}}"></td>
+                <td class="data"><img class="imageData" src={{movieDetails.poster}} alt="{{movieDetails.title}}"></td>
                 {{else}}
-                <td class="data"><img id="imageData" src="/images/image.jpeg" alt="{{movieDetails.title}}"></td>
+                <td class="data"><img class="imageData" src="/images/image.jpeg" alt="{{movieDetails.title}}"></td>
                 {{/if}}
 
 
                 {{#if movieDetails.title}}
-                <td class="data" id="titleData">{{movieDetails.title}}</td>
+                <td class="data titleData">{{movieDetails.title}}</td>
                 {{else}}
-                <td class="data" id="titleData">N/A</td>
+                <td class="data titleData">N/A</td>
                 {{/if}}
 
                 {{#if movieDetails.release_date}}
-                <td class="data" id="releaseData">{{movieDetails.release_date}}</td>
+                <td class="data releaseData">{{movieDetails.release_date}}</td>
                 {{else}}
-                <td class="data" id="releaseData">N/A</td>
+                <td class="data releaseData">N/A</td>
                 {{/if}}
 
                 {{#if movieDetails.rating.average}}
-                <td class="data" id="ratingData">{{movieDetails.rating.average}}</td>
+                <td class="data ratingData" >{{movieDetails.rating.average}}</td>
                 {{else}}
-                <td class="data" id="ratingData">N/A</td>
+                <td class="data ratingData" >N/A</td>
                 {{/if}}
 
-                <td class="data" id="editData"><a href="/addList/editPage?id='{{external_id}}'" class="editButton"
+                <td class="data editData"><a href="/addList/editPage?id='{{external_id}}'" class="editButton"
                         id="{{external_id}}">Edit</a></td>
             </tr>
-        </tbody>
-  
-
-    </table>
+        </tbody>    
       {{/each}}
+      </table>
 
 </div>

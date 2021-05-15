@@ -16,9 +16,9 @@
     <div class="float-child">
         <div>
             {{#if movies.title}}
-            <h1 class="title "> {{movies.title}}</h1>
+            <h1 class="title"> {{movies.title}}</h1>
             {{else}}
-            <h1 class="title "> No Title</h1>
+            <h1 class="title"> No Title</h1>
             {{/if}}
         </div>
         <div class="directionRow">
@@ -37,7 +37,7 @@
         <div class="directionRow">
             <h2>Genres: </h2>
             {{#each movies.genres}}
-            <p id="inline">{{name}}</p>
+            <p class="inline">{{name}}</p>
             {{/each}}
         </div>
         {{else}}
@@ -128,8 +128,10 @@
     {{#if user}}
     <div>
         <form id="addComment">
-            <h4>Add comments</h4>
-            <textarea placeholder="Please enter comment here" name="commentContent" id="commentBody"></textarea>
+            <h3>Add comments</h3>
+            <label for="commentBody">
+            <textarea placeholder="Please enter comment here" name="commentContent" id="commentBody" ></textarea>
+            </label>
             <button form="addComment" type="submit" name="commentAdd" id="submitComment" >
                 Submit
             </button>
@@ -139,37 +141,37 @@
 
 
     {{#if movies.comments}}
-    <h4 class="commentHeading">Comments</h4>
+    <h3 class="commentHeading">Comments</h3>
     {{#each movies.comments}}
     <div class="commentStyle">
-        <h6 class="commentName">{{user.firstname}}</h6>
+        <h4 class="commentName">{{user.firstname}}</h4>
         <p class="commentMessageStyle">{{message}}</p>
     </div>
     <div class="directionRowComment">
         <div class="rateContainer">
             <div class="userRatingContainer">
                 {{#if userLiked}}
-                <div data-value={{isUserLoggedIn}} id="alreadyliked" class="likeContainer">
-                    <i value={{_id}} id='{{_id}}alreadyliked' class="fas fa-thumbs-up"></i>
+                <div data-value={{isUserLoggedIn}} id="{{_id}}al" class="alreadylikedContainer">
+                    <i data-value={{_id}} id='{{_id}}alreadyliked' class="fas fa-thumbs-up"></i>
                 </div>
                 {{else}}
-                <div data-value={{isUserLoggedIn}} id="like" class="likeContainer">
-                    <i value={{_id}} id='{{_id}}like' class="far fa-thumbs-up"></i>
+                <div data-value={{isUserLoggedIn}} id="{{_id}}l" class="likeContainer">
+                    <i data-value={{_id}} id='{{_id}}like' class="far fa-thumbs-up"></i>
                 </div>
                 {{/if}}
-                <h6>{{rating.like}}</h6>
+                <h4>{{rating.like}}</h4>
             </div>
             <div class="userRatingContainer">
                 {{#if userDisliked}}
-                <div data-value={{isUserLoggedIn}} id="alreadydisliked" class="likeContainer">
-                    <i value={{_id}} id='{{_id}}alreadydisliked' class="fas fa-thumbs-down"></i>
+                <div data-value={{isUserLoggedIn}} id="{{_id}}ad" class="alreadyDislikedContainer">
+                    <i data-value={{_id}} id='{{_id}}alreadydisliked' class="fas fa-thumbs-down"></i>
                 </div>
                 {{else}}
-                <div data-value={{isUserLoggedIn}} id="dislike" class="likeContainer">
-                    <i value={{_id}} id='{{_id}}dislike' class="far fa-thumbs-down"></i>
+                <div data-value={{isUserLoggedIn}} id="{{_id}}d" class="dislikeContainer">
+                    <i data-value={{_id}} id='{{_id}}dislike' class="far fa-thumbs-down"></i>
                 </div>
                 {{/if}}
-                <h6>{{rating.dislike}}</h6>
+                <h4>{{rating.dislike}}</h4>
             </div>
         </div>
         {{#if validUser}}
@@ -185,12 +187,12 @@
     {{#if user}}
     {{else}}
     <div class='noComments'>
-    <h4>No comments available! Please <a href="/">login</a> to add comments</h4>
+    <h3>No comments available! Please <a href="/">login</a> to add comments</h3>
     </div>
     {{/if}}
     {{/if}}
 </div>
-</div>
+
 <div class="footer">
     {{>footer}}
 </div>

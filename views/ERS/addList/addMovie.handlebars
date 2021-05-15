@@ -1,10 +1,16 @@
+{{#section 'head'}}
+<title>Search Movie</title>
+{{/section}}
+
 {{>header}}
 
 <div class="container">
     <div class="form">
         <form method="POST" id='searchForm'>
+            <label for ="search_term">
             <input type="text" name="serachTerm" id="search_term" size="43"
                 placeholder="Search for Movie to add to your list" required />
+            </label>
             <button type="submit" id="inputButton">Submit</button>
         </form>
     </div>
