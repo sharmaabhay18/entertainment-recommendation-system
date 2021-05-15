@@ -396,25 +396,25 @@ tr {
   border-bottom: #EBEBEB 1px solid;
 }
 
-#imageData{
+.imageData{
   width: 48px;
   height: 68px;
   border: #EBEBEB 1px solid;  
 }
 
-#titleData {
+.titleData {
   width: 350px;
   text-align: center;
 }
 
-#releaseData{
+.releaseData{
   width: 350px;
   text-align: center;
   position:relative; 
   left:30px
 }
 
-#ratingData{
+.ratingData{
   width: 350px;
   text-align: center;
   position:relative; 
@@ -422,7 +422,7 @@ tr {
 }
 
 
-#editData{
+.editData{
   width: 350px;
   text-align: center;
 }
